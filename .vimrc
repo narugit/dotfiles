@@ -14,7 +14,8 @@ set autoread
 set hidden
 """ 入力中のコマンドをステータスに表示する
 set showcmd
-
+""" マウススクロールを有効にする
+set mouse=a
 
 "" 見た目系
 
@@ -36,7 +37,9 @@ set laststatus=2
 set wildmode=list:longest
 """ 折り返し時に表示行単位での移動できるようにする
 nnoremap j gj
+nnoremap <Down> gj
 nnoremap k gk
+nnoremap <Up> gk
 """ カーソルが一番上や下に移動した時のビープ音を消す＆画面フラッシュも消す
 set vb t_vb=
 
@@ -69,9 +72,29 @@ set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 
+"" ウィンドウ系
+
+" 新しいウィンドウを下に開く
+set splitbelow
+" 新しいウィンドウを右に開く
+set splitright
+
+
 "" Markdown
+
 autocmd BufRead,BufNewFile *.mkd  set filetype=markdown
 autocmd BufRead,BufNewFile *.md  set filetype=markdown
+
+
+"" Terminal
+""" Ctrl + @ でターミナルを開く
+nnoremap <silent> <C-@> :ResizeTerminalWindow<CR>
+""" ウィンドウ幅変更
+command ResizeTerminalWindow call s:ResizeTerminalWindow()
+function! s:ResizeTerminalWindow()
+    :terminal
+    :call feedkeys("\<C-w>10-")
+endfunction
 
 
 "" 外部パッケージ
@@ -82,6 +105,8 @@ autocmd BufRead,BufNewFile *.md  set filetype=markdown
 nnoremap <silent><C-\> :NERDTreeTabsToggle<CR>
 """" vim起動時に起動する
 autocmd VimEnter * NERDTree
+"""" vim起動時にカーソルをファイルエリアに合わせる
+autocmd VimEnter * wincmd p
 
 
 """ previm/previm

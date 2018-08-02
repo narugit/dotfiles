@@ -42,7 +42,10 @@ nnoremap k gk
 nnoremap <Up> gk
 """ カーソルが一番上や下に移動した時のビープ音を消す＆画面フラッシュも消す
 set vb t_vb=
-
+""" カラースキームをmolokaiにする
+syntax on
+colorscheme molokai
+set t_Co=256
 
 "" Tab系
 
@@ -116,3 +119,11 @@ nnoremap <silent> <C-p> :PrevimOpen<CR>
 """" 自動で折りたたまないようにする
 let g:vim_markdown_folding_disabled=1
 let g:previm_enable_realtime = 1
+
+
+"" vim-plug
+
+call plug#begin('~/.vim/plugged')
+Plug 'lervag/vimtex'
+call plug#end()
+

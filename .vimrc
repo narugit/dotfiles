@@ -100,6 +100,10 @@ function! s:ResizeTerminalWindow()
 endfunction
 
 
+"" python
+set pythonthreedll=$VIM/python36/python36.dll
+
+
 "" 外部パッケージ
 
 """ jistr/vim-nerdtree-tabs

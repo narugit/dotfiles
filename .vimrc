@@ -137,32 +137,28 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
+let s:dein_path = expand('$HOME/.vim/dein')
+let s:dein_repo_path = s:dein_path . '/repos/github.com/Shougo/dein.vim'
 
-" Required:
-if dein#load_state('$HOME/.cache/dein')
-  call dein#begin('$HOME/.cache/dein')
+" dein.vim がなければ github からclone
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_path)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_path
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_path, ':p')
+endif
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
+if dein#load_state(s:dein_path)
+  call dein#begin(s:dein_path)
 
-  " Add or remove your plugins here:
-  " =============== plugins ===============
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('jistr/vim-nerdtree-tabs')
-  call dein#add('Xuyuanp/nerdtree-git-plugin')
-  call dein#add('previm/previm')
-  call dein#add('tyru/open-browser.vim')
-  " =======================================
+  let g:config_dir  = expand('~/.vim/dein/userconfig')
+  let s:toml        = g:config_dir . '/plugins.toml'
+  let s:lazy_toml   = g:config_dir . '/plugins_lazy.toml'
 
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+  " TOML 読み込み
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-  " Required:
   call dein#end()
   call dein#save_state()
 endif

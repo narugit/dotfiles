@@ -13,6 +13,18 @@ This is my dotfiles' settings.
 
 ### ~/.vim/pack/mypack/start/
 
+or
+
+### dein
+
+1. ```$ mkdir -p ~/.cache/dein```
+
+2. ```$ cd ~/.cache/dein```
+
+3. ```$ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh```
+
+4. ```$ sh ./installer.sh ~/.cache/dein```
+
 ### nerdtree
 
 - [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)

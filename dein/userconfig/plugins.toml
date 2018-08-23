@@ -21,3 +21,6 @@
 
 [[plugins]]
     repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+    repo = 'w0rp/ale'

@@ -36,3 +36,13 @@ or
 - [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
 - [previm/previm](https://github.com/previm/previm)
 - [tyru/open-browser.vim](https://github.com/tyru/open-browser.vim)
+
+### ファイルアイコン
+
+- [ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons)
+
+#### 使用したフォント
+
+- [Cica 2.0.0](https://github.com/miiton/Cica)
+
+フォントをインストールしてBashのフォントに設定する

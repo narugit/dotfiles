@@ -4,6 +4,8 @@
 
 """ 文字コードをUFT-8に設定
 set fenc=utf-8
+
+set encoding=UTF-8
 """ バックアップファイルを作らない
 set nobackup
 """ スワップファイルを作らない

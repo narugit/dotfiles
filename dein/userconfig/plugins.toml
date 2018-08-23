@@ -24,3 +24,6 @@
 
 [[plugins]]
     repo = 'w0rp/ale'
+
+[[plugins]]
+    repo = 'ryanoasis/vim-devicons'

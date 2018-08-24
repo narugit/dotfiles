@@ -105,35 +105,6 @@ endfunction
 "" python
 set pythonthreedll=$VIM/python36/python36.dll
 
-
-"" 外部パッケージ
-
-""" jistr/vim-nerdtree-tabs
-
-"""" Ctrl+\ でディレクトリツリーの表示/非表示をトグルする
-nnoremap <silent><C-\> :NERDTreeTabsToggle<CR>
-"""" vim起動時に起動する
-autocmd VimEnter * NERDTree
-"""" vim起動時にカーソルをファイルエリアに合わせる
-autocmd VimEnter * wincmd p
-
-
-""" previm/previm
-
-"""" Ctrl + p でプレビュー
-nnoremap <silent> <C-p> :PrevimOpen<CR>
-"""" 自動で折りたたまないようにする
-let g:vim_markdown_folding_disabled=1
-let g:previm_enable_realtime = 1
-
-
-"" vim-plug
-
-"call plug#begin('~/.vim/plugged')
-"Plug 'lervag/vimtex'
-"call plug#end()
-
-
 " -------------------- dein setting --------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -175,3 +146,30 @@ if dein#check_install()
 endif
 
 "End dein Scripts-------------------------
+
+"" 外部パッケージ
+
+""" jistr/vim-nerdtree-tabs
+
+"""" Ctrl+\ でディレクトリツリーの表示/非表示をトグルする
+nnoremap <silent><C-\> :NERDTreeTabsToggle<CR>
+"""" vim起動時に起動する
+autocmd VimEnter * NERDTree
+"""" vim起動時にカーソルをファイルエリアに合わせる
+autocmd VimEnter * wincmd p
+
+
+""" previm/previm
+
+"""" Ctrl + m でプレビュー
+nnoremap <silent> <C-m> :PrevimOpen<CR>
+"""" 自動で折りたたまないようにする
+let g:vim_markdown_folding_disabled=1
+let g:previm_enable_realtime = 1
+
+
+""" font in NERDTree
+set ambiwidth=double
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'

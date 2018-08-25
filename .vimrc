@@ -157,7 +157,13 @@ nnoremap <silent><C-\> :NERDTreeTabsToggle<CR>
 autocmd VimEnter * NERDTree
 """" vim起動時にカーソルをファイルエリアに合わせる
 autocmd VimEnter * wincmd p
-
+"""" R押下で2回NERDTreeRefreshRoot()を呼ぶ 
+"""" これにより，Rを1度押すだけで新規ファイルにアイコンまで反映され()を呼ぶ 
+"""" これにより，Rを1度押すだけで新規ファイルにアイコンまで反映される
+augroup nerdtree_custom 
+autocmd! 
+augroup END 
+autocmd nerdtree_custom filetype nerdtree nnoremap <buffer> R :call nerdtree#ui_glue#invokeKeyMap("R")<CR>:call nerdtree#ui_glue#invokeKeyMap("R")<CR>
 
 """ previm/previm
 

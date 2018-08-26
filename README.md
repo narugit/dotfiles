@@ -35,13 +35,9 @@ or
 
 ### dein
 
-1. ```$ mkdir -p ~/.cache/dein```
+    $ mkdir -p ~/.vim/dein/userconfig
 
-2. ```$ cd ~/.cache/dein```
-
-3. ```$ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh```
-
-4. ```$ sh ./installer.sh ~/.cache/dein```
+    $ touch ~/.vim/dein/userconfig/plugins.toml ~/.vim/delin/userconfig/plugins_lazy.toml
 
 ### nerdtree
 

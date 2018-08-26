@@ -10,10 +10,9 @@ This is my dotfiles' settings.
 
 #### Install
 
-   $ mkdir ~/mylib && cd ~/mylib
+    $ mkdir ~/mylib && cd ~/mylib
 
-   $ git clone https://github.com/tadashi-aikawa/pureline-inspired  
-
+    $ git clone https://github.com/tadashi-aikawa/pureline-inspired  
 ### ~/.vim/colors/
 
 - [tomasr/molokai](https://github.com/tomasr/molokai)

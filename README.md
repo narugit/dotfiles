@@ -8,6 +8,25 @@ This is my dotfiles' settings.
 
 - [tadashi-aikawa/pureline-inspired](https://github.com/tadashi-aikawa/pureline-inspired)
 
+#### Install
+
+   $ mkdir ~/mylib && cd ~/mylib
+
+   $ git clone https://github.com/tadashi-aikawa/pureline-inspired  
+
+### ~/.vim/colors/
+
+- [tomasr/molokai](https://github.com/tomasr/molokai)
+
+#### Install
+
+    $ mkdir -p ~/.vim/colors && cd
+
+    $ git clone https://github.com/tomasr/molokai
+
+    $ mv ~/molokai/colors/molokai.vim ~/.vim/colors/
+
+    $ rm -rf ~/molokai
 
 ## Vim Setting
 

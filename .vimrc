@@ -2,9 +2,9 @@
 
 "" 基本設定
 
-""" 文字コードをUFT-8に設定
+""" ファイルのエンコードをUFT-8に設定
 set fenc=utf-8
-
+""" エンコードをUTF-8に設定（vim-deviconsを正しく動作させるためにも必要）
 set encoding=UTF-8
 """ バックアップファイルを作らない
 set nobackup
@@ -23,6 +23,8 @@ set mouse=a
 
 """ 行番号を表示
 set number
+""" 相対行表示
+set relativenumber
 """ 現在の行を強調表示
 set cursorline
 """ 現在の行を強調表示（縦）
@@ -87,15 +89,19 @@ set splitright
 
 "" Markdown
 
-autocmd BufRead,BufNewFile *.mkd  set filetype=markdown
-autocmd BufRead,BufNewFile *.md  set filetype=markdown
+augroup markdown_group 
+    autocmd! 
+augroup END 
+
+autocmd markdown_group BufRead,BufNewFile *.mkd  set filetype=markdown
+autocmd markdown_group BufRead,BufNewFile *.md  set filetype=markdown
 
 
 "" Terminal
 """ Ctrl + @ でターミナルを開く
 nnoremap <silent> <C-@> :ResizeTerminalWindow<CR>
 """ ウィンドウ幅変更
-command ResizeTerminalWindow call s:ResizeTerminalWindow()
+command! ResizeTerminalWindow call s:ResizeTerminalWindow()
 function! s:ResizeTerminalWindow()
     :terminal
     :call feedkeys("\<C-w>10-")
@@ -153,17 +159,19 @@ endif
 
 """" Ctrl+\ でディレクトリツリーの表示/非表示をトグルする
 nnoremap <silent><C-\> :NERDTreeTabsToggle<CR>
+
+augroup nerdtree_group 
+    autocmd! 
+augroup END 
+
 """" vim起動時に起動する
-autocmd VimEnter * NERDTree
+autocmd nerdtree_group VimEnter * NERDTree
 """" vim起動時にカーソルをファイルエリアに合わせる
-autocmd VimEnter * wincmd p
+autocmd nerdtree_group VimEnter * wincmd p
 """" R押下で2回NERDTreeRefreshRoot()を呼ぶ 
 """" これにより，Rを1度押すだけで新規ファイルにアイコンまで反映され()を呼ぶ 
 """" これにより，Rを1度押すだけで新規ファイルにアイコンまで反映される
-augroup nerdtree_custom 
-autocmd! 
-augroup END 
-autocmd nerdtree_custom filetype nerdtree nnoremap <buffer> R :call nerdtree#ui_glue#invokeKeyMap("R")<CR>:call nerdtree#ui_glue#invokeKeyMap("R")<CR>
+autocmd nerdtree_group filetype nerdtree nnoremap <buffer> R :call nerdtree#ui_glue#invokeKeyMap("R")<CR>:call nerdtree#ui_glue#invokeKeyMap("R")<CR>
 
 """ previm/previm
 
@@ -201,7 +209,9 @@ let g:ctrlp_custom_ignore = {
 
 
 """ ALE
+" ファイル保存時にlinterを働かせる
 let g:ale_lint_on_save = 1
+" ファイルに修正が入る度にlinterを働かせる設定を無効にする
 let g:ale_lint_on_text_changed = 0
 
 " ファイルオープン時にチェックしたくない場合

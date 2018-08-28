@@ -32,4 +32,4 @@
     repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 [[plugins]]
-    repo = 'kien/ctrlp.vim'
+    repo = 'ctrlpvim/ctrlp.vim'

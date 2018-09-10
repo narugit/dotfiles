@@ -2,14 +2,17 @@
     path = .gitconfig.local
 
 [core]
-	quotepath = false
+    quotepath = false
+    # 以下，windows向け設定
+    autoCRLF = false
+    whitespace = cr-at-eol
 
 [gui]
-	encoding = utf-8
+    encoding = utf-8
 
 [alias]
-	st = status
-	glog = log --all --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %C(yellow)%cn %Cred%d %Creset%s'
+    st = status
+    glog = log --all --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %C(yellow)%cn %Cred%d %Creset%s'
     difff = diff --word-diff
 
 [include]

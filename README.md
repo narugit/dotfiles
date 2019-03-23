@@ -37,7 +37,7 @@ or
 
     $ mkdir -p ~/.vim/dein/userconfig
 
-    $ touch ~/.vim/dein/userconfig/plugins.toml ~/.vim/delin/userconfig/plugins_lazy.toml
+    $ touch ~/.vim/dein/userconfig/plugins.toml ~/.vim/dein/userconfig/plugins_lazy.toml
 
 ### nerdtree
 

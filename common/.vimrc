@@ -46,9 +46,9 @@ nnoremap k gk
 nnoremap <Up> gk
 """ カーソルが一番上や下に移動した時のビープ音を消す＆画面フラッシュも消す
 set vb t_vb=
-""" カラースキームをmolokaiにする
+""" カラースキームをicebergにする
 syntax on
-colorscheme molokai
+colorscheme iceberg
 set t_Co=256
 
 "" Tab系

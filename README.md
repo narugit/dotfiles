@@ -36,7 +36,7 @@ This is my dotfiles' settings.
 
     $ git clone https://github.com/cocopon/iceberg.vim
 
-    $ mv ~/molokai/colors/iceberg.vim ~/.vim/colors/
+    $ mv ~/iceberg.vim/colors/iceberg.vim ~/.vim/colors/
 
     $ rm -rf ~/iceberg.vim
 

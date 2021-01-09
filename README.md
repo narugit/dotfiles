@@ -14,10 +14,10 @@ This is my dotfiles' settings.
 
     $ git clone https://github.com/tadashi-aikawa/pureline-inspired  
 ### ~/.vim/colors/
-
+#### molokai
 - [tomasr/molokai](https://github.com/tomasr/molokai)
 
-#### Install
+##### Install
 
     $ mkdir -p ~/.vim/colors && cd
 
@@ -26,6 +26,19 @@ This is my dotfiles' settings.
     $ mv ~/molokai/colors/molokai.vim ~/.vim/colors/
 
     $ rm -rf ~/molokai
+    
+#### molokai
+- [cocopon/iceberg](https://github.com/cocopon/iceberg.vim)
+
+##### Install
+
+    $ mkdir -p ~/.vim/colors && cd
+
+    $ git clone https://github.com/cocopon/iceberg.vim
+
+    $ mv ~/molokai/colors/iceberg.vim ~/.vim/colors/
+
+    $ rm -rf ~/iceberg.vim
 
 ## Vim Setting
 

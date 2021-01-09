@@ -27,7 +27,7 @@ This is my dotfiles' settings.
 
     $ rm -rf ~/molokai
     
-#### molokai
+#### iceberg
 - [cocopon/iceberg](https://github.com/cocopon/iceberg.vim)
 
 ##### Install

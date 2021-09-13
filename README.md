@@ -75,4 +75,5 @@ or
 フォントをインストールしてBashのフォントに設定する
 
 ## Other tools
-- [fzf](https://github.com/junegunn/fzf)
+- [fzf](https://github.com/junegunn/fzf#using-git): official `.sh`
+- [bat](https://github.com/sharkdp/bat): `brew`

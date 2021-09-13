@@ -73,3 +73,6 @@ or
 - [Cica 2.0.0](https://github.com/miiton/Cica)
 
 フォントをインストールしてBashのフォントに設定する
+
+## Other tools
+- [fzf](https://github.com/junegunn/fzf)

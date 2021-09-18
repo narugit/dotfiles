@@ -1,3 +1,14 @@
+case `uname` in
+  Darwin)
+    IS_OSX=true
+    IS_LINUX=false
+  ;;
+  Linux)
+    IS_LINUX=true
+    IS_OSX=false
+  ;;
+esac
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -8,6 +19,12 @@ fi
 export TERM="xterm-256color"
 # readelfとかのPATH
 export PATH="/usr/local/opt/binutils/bin:$PATH"
+# flutterのPATH
+export PATH="$PATH:/Users/naru/develop/flutter/bin"
+# android-tools
+export PATH="$PATH:/Users/naru/Library/Android/sdk/platform-tools"
+# go getを使用するためにGOPATHを設定する
+export GOPATH=/Users/naru/app
 
 ZSHHOME="${HOME}/.zsh.d"
 
@@ -42,3 +59,15 @@ zinit light-mode for \
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+if "${IS_OSX}"; then
+  # ctrl-cがtrapのせいで効かなくなるときのため
+  function reset_trap {
+    # Hacky hack because of <function/script-that-sets-trap-INT>
+    trap - INT
+  }
+
+  autoload -Uz add-zsh-hook
+  add-zsh-hook preexec reset_trap
+fi
+

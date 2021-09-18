@@ -1,4 +1,0 @@
-# Tab補完で大文字小文字を区別する
-set completion-ignore-case off
-# bash上でのbeep音を消す
-set bell-style none

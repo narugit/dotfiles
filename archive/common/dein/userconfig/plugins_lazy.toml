@@ -1,3 +1,0 @@
-[[plugins]]
-    repo = 'Shougo/neco-vim'
-    on_ft = 'vim'

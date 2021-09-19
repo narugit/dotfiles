@@ -15,5 +15,5 @@ ZSH_PRIORITIES_CONF="${ZSH_CONF_DIR}/priorities.conf"
 source "${ZSH_PRIORITIES_CONF}"
 
 for zsh_conf in ${ZSH_CONFS}; do
-  source $zsh_conf
+  source "${ZSH_DONFS_DIR}/${zsh_conf}"
 done

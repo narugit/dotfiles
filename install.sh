@@ -88,6 +88,9 @@ setup_zsh() {
     mkdir -p "${ZSH_CONFS_DIR_DEST}"
   fi
   ln -snfv "${ZSH_CONFS_DIR_SRC}"/* "${ZSH_CONFS_DIR_DEST}"
+
+  info "Activating zshrc"
+  source "${ZSH_DIR_DEST}/.zshrc"
 }
 
 setup_vim() {

@@ -103,8 +103,26 @@ setup_vim() {
 
   local VIM_DIR_SRC="${DOTFILES_DIR}/etc/vim"
   local VIM_DIR_DEST="${HOME}"
-  info "Creating symlink for vim"
+  info "Creating symlink for vimrc"
   ln -snfv "${VIM_DIR_SRC}/.vimrc" "${VIM_DIR_DEST}/.vimrc"
+
+  local VIM_INIT_DIR_SRC="${DOTFILES_DIR}/etc/vim/init"
+  local VIM_INIT_DIR_DEST="${HOME}/.vim/init"
+  if [ ! -e "${VIM_INIT_DIR_DEST}" ]; then
+    info "Creating directory for vimrc (init)"
+    mkdir -p "${VIM_INIT_DIR_DEST}"
+  fi
+  info "Creating symlink for vimrc (init)"
+  ln -snfv "${VIM_INIT_DIR_SRC}"/*.vim "${VIM_INIT_DIR_DEST}"
+
+  local VIM_PLUGIN_DIR_SRC="${DOTFILES_DIR}/etc/vim/plugin"
+  local VIM_PLUGIN_DIR_DEST="${HOME}/.vim/plugin"
+  if [ ! -e "${VIM_PLUGIN_DIR_DEST}" ]; then
+    info "Creating directory for vimrc (plugin)"
+    mkdir -p "${VIM_PLUGIN_DIR_DEST}"
+  fi
+  info "Creating symlink for vimrc (plugin)"
+  ln -snfv "${VIM_PLUGIN_DIR_SRC}"/*.vim "${VIM_PLUGIN_DIR_DEST}"
 
   local DEIN_PLUGINS_DIR_SRC="${VIM_DIR_SRC}/dein"
   local DEIN_PLUGINS_DIR_DEST="${HOME}/.vim/dein/userconfig"

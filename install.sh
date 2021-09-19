@@ -2,7 +2,7 @@
 
 DOTFILES_DIR="${HOME}/dotfiles"
 
-case `uname` in
+case $(uname) in
   Darwin)
     IS_OSX=true
     IS_LINUX=false
@@ -44,7 +44,7 @@ success() {
 }
 
 download_dotfiles() {
-  git clone https://github.com/narugit/dotfiles.git ${DOTFILES_DIR}
+  git clone https://github.com/narugit/dotfiles.git "${DOTFILES_DIR}"
 }
 
 change_shell() {
@@ -57,6 +57,7 @@ change_shell() {
 
 download_font() {
   # download font from https://github.com/miiton/Cica
+  title "Downloading font"
 }
 
 setup_vim() {
@@ -66,7 +67,7 @@ setup_vim() {
   local VIM_COLOR_DIR="${HOME}/.vim/colors"
   if [ ! -e "${VIM_COLOR_DIR}" ]; then
     info "Creating directory for vim colors"
-    mkdir -p ${VIM_COLOR_DIR}
+    mkdir -p "${VIM_COLOR_DIR}"
   fi
   curl -fsSL https://raw.githubusercontent.com/cocopon/iceberg.vim/master/colors/iceberg.vim -o "${VIM_COLOR_DIR}/iceberg.vim"
 
@@ -77,17 +78,18 @@ setup_vim() {
 
   local DEIN_PLUGINS_DIR_DEST="${HOME}/.vim/dein/userconfig"
   local DEIN_PLUGINS_DIR_SRC="${VIM_DIR_SRC}/dein"
-  if [ ! -e "${DEIN_PLUGINS_DIR}" ]; then
+  if [ ! -e "${DEIN_PLUGINS_DIR_DEST}" ]; then
     info "Creating directory for dein plugins"
-    mkdir -p ${DEIN_PLUGINS_DIR}
+    mkdir -p "${DEIN_PLUGINS_DIR_DEST}"
   fi
   info "Creating symlink for dein plugins"
-  ln -snfv "${DEIN_PLUGINS_DIR_SRC}/plugins.toml" "${DEIN_PLUGINS_DIR}/plugins.toml"
-  ln -snfv "${DEIN_PLUGINS_DIR_SRC}/plugins_lazy.toml" "${DEIN_PLUGINS_DIR}/plugins_lazy.toml"
+  ln -snfv "${DEIN_PLUGINS_DIR_SRC}/plugins.toml" "${DEIN_PLUGINS_DIR_DEST}/plugins.toml"
+  ln -snfv "${DEIN_PLUGINS_DIR_SRC}/plugins_lazy.toml" "${DEIN_PLUGINS_DIR_DEST}/plugins_lazy.toml"
 }
 
 setup_dotfiles_sync_checker() {
   # register tracker for dotfiles modification
+  title "Setup dotriles sync checker"
 }
 
 download_dotfiles

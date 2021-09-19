@@ -167,6 +167,8 @@ setup_git() {
   info "Creating symlink for gitignore"
   if "${IS_DARWIN}"; then
     ln -snfv "${GITIGNORE_DIR_SRC}/.gitignore_global_mac" "${GITIGNORE_DIR_DEST}/.gitignore_global"
+  elif "${IS_LINIX}"; then
+    ln -snfv "${GITIGNORE_DIR_SRC}/.gitignore_global_linux" "${GITIGNORE_DIR_DEST}/.gitignore_global"
   fi
 
   local GIT_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/git/.git.d"

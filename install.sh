@@ -120,6 +120,10 @@ setup_vim() {
 setup_tmux() {
   title "Setup tmux"
 
+  info "Install tpm"
+  local TPM_DIR="${HOME}/.tmux/plugins/tpm"
+  git clone https://github.com/tmux-plugins/tpm "${TPM_DIR}"
+
   local TMUX_DIR_SRC="${DOTFILES_DIR}/etc/tmux"
   local TMUX_DIR_DEST="${HOME}"
   local TMUX_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/tmux/.tmux.d"

@@ -6,5 +6,5 @@ This is my dotfiles' settings.
 under construction
 
 ```console
-$ bash -c "$(curl -fsSL https://raw.githubusercontent.com/narugit/dotfiles/master/install.sh)"
+$ bash -c "$(curl -H 'Cache-Control: no-cache' -fsSL https://raw.githubusercontent.com/narugit/dotfiles/master/install.sh)"
 ```

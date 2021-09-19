@@ -142,6 +142,13 @@ setup_dotfiles_sync_checker() {
   title "Setup dotfiles sync checker"
 }
 
+post_install_message() {
+  title "Command to enable some package"
+  
+  info "For zsh, \"$ source ~/.zshrc\""
+  info "For tmux, launch tmux then press \"Prefix + I\""
+}
+
 download_dotfiles
 change_shell
 download_font
@@ -149,5 +156,6 @@ setup_zsh
 setup_vim
 setup_tmux
 setup_dotfiles_sync_checker
+post_install_message
 
 success "Install successful."

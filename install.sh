@@ -44,6 +44,7 @@ success() {
 }
 
 download_dotfiles() {
+  title "Downloading narugit/dotfiles"
   if [ -e "${DOTFILES_DIR}" ]; then
     warning "Remove ${DOTFILES_DIR}?"
     read -p "(y/N): " yn

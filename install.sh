@@ -90,7 +90,7 @@ setup_zsh() {
   ln -snfv "${ZSH_CONFS_DIR_SRC}"/* "${ZSH_CONFS_DIR_DEST}"
 
   info "Activating zshrc"
-  source "${ZSH_DIR_DEST}/.zshrc"
+  exec /bin/zsh
 }
 
 setup_vim() {

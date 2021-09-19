@@ -121,7 +121,7 @@ setup_tmux() {
 
 setup_dotfiles_sync_checker() {
   # register tracker for dotfiles modification
-  title "Setup dotriles sync checker"
+  title "Setup dotfiles sync checker"
 }
 
 download_dotfiles

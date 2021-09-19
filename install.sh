@@ -44,6 +44,18 @@ success() {
 }
 
 download_dotfiles() {
+  if [ -e "${DOTFILES_DIR}" ]; then
+    warning "Remove ${DOTFILES_DIR}?"
+    read -p "(y/N): " yn
+    case "$yn" in
+      [yY]*)
+        rm -rf "${DOTFILES_DIR}"
+        ;;
+      *)
+        error "Abort. You need to remove ${DOTFILES_DIR}"
+        exit 1;;
+    esac
+  fi
   git clone https://github.com/narugit/dotfiles.git "${DOTFILES_DIR}"
 }
 

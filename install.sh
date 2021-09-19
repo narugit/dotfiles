@@ -71,13 +71,13 @@ setup_vim() {
   fi
   curl -fsSL https://raw.githubusercontent.com/cocopon/iceberg.vim/master/colors/iceberg.vim -o "${VIM_COLOR_DIR}/iceberg.vim"
 
-  local VIM_DIR_DEST="${HOME}"
   local VIM_DIR_SRC="${DOTFILES_DIR}/etc/vim"
+  local VIM_DIR_DEST="${HOME}"
   info "Creating symlink for vim"
   ln -snfv "${VIM_DIR_SRC}/.vimrc" "${VIM_DIR_DEST}/.vimrc"
 
-  local DEIN_PLUGINS_DIR_DEST="${HOME}/.vim/dein/userconfig"
   local DEIN_PLUGINS_DIR_SRC="${VIM_DIR_SRC}/dein"
+  local DEIN_PLUGINS_DIR_DEST="${HOME}/.vim/dein/userconfig"
   if [ ! -e "${DEIN_PLUGINS_DIR_DEST}" ]; then
     info "Creating directory for dein plugins"
     mkdir -p "${DEIN_PLUGINS_DIR_DEST}"
@@ -85,6 +85,21 @@ setup_vim() {
   info "Creating symlink for dein plugins"
   ln -snfv "${DEIN_PLUGINS_DIR_SRC}/plugins.toml" "${DEIN_PLUGINS_DIR_DEST}/plugins.toml"
   ln -snfv "${DEIN_PLUGINS_DIR_SRC}/plugins_lazy.toml" "${DEIN_PLUGINS_DIR_DEST}/plugins_lazy.toml"
+}
+
+setup_tmux() {
+  title "Setup tmux"
+
+  local TMUX_DIR_SRC="${DOTFILES_DIR}/etc/tmux"
+  local TMUX_DIR_DEST="${HOME}"
+  local TMUX_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/tmux"
+  local TMUX_CONFS_DIR_DEST="${HOME}/.tmux.d"
+  info "Creating symlink for tmux"
+  ln -snfv "${TMUX_DIR_SRC}/.tmux.conf" "${TMUX_DIR_DEST}/.tmux.conf"
+  if [ ! -e "${TMUX_CONFS_DIR_DEST}" ]; then
+    mkdir -p "${TMUX_CONFS_DIR_DEST}"
+  fi
+  ln -snfv "${TMUX_CONFS_DIR_SRC}/*.tmux" "${TMUX_CONFS_DIR_DEST}/"
 }
 
 setup_dotfiles_sync_checker() {
@@ -96,6 +111,7 @@ download_dotfiles
 change_shell
 download_font
 setup_vim
+setup_tmux
 setup_dotfiles_sync_checker
 
 success "Install successful."

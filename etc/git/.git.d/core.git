@@ -1,0 +1,4 @@
+[core]
+  whitespace = cr-at-eol
+  autoCRLF = false
+  excludesfile = ~/.gitignore_global

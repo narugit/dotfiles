@@ -1,0 +1,7 @@
+[alias]
+  b = branch
+  co = checkout
+  c-p = cherry-pick
+  glog = log --all --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %C(yellow)%cn %Cred%d %Creset%s'
+  st = status
+  sw = switch

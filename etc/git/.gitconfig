@@ -1,0 +1,6 @@
+[include]
+  path = ~/.git.d/user.git
+  path = ~/.git.d/alias.git
+  path = ~/.git.d/pager.git
+  path = ~/.git.d/core.git
+  path = ~/.git.d/init.git

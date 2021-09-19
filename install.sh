@@ -8,8 +8,7 @@ case $(uname) in
     IS_LINUX=false
   ;;
   Linux)
-    IS_LINUX=true
-    IS_DARWIN=false
+    IS_LINUX=true IS_DARWIN=false
   ;;
 esac
 
@@ -155,6 +154,27 @@ setup_tmux() {
   ln -snfv "${TMUX_CONFS_DIR_SRC}"/*.tmux "${TMUX_CONFS_DIR_DEST}"
 }
 
+setup_git() {
+  title "Setup git"
+  
+  local GIT_CONF_DIR_SRC="${DOTFILES_DIR}/etc/git"
+  local GIT_CONF_DIR_DEST="${HOME}"
+  info "Creating symlink for git"
+  ln -snfv "${GIT_CONF_DIR_SRC}/.gitconfig" "${GIT_CONF_DIR_DEST}/.gitconfig"
+  local GITIGNORE_DIR_SRC="${DOTFILES_DIR}/etc/git"
+  local GITIGNORE_DIR_DEST="${HOME}"
+  info "Creating symlink for gitignore"
+  ln -snfv "${GITIGNORE_DIR_SRC}/.gitignore_global" "${GITIGNORE_DIR_DEST}/.gitignore_global"
+  local GIT_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/git/.git.d"
+  local GIT_CONFS_DIR_DEST="${HOME}/.git.d"
+  if [ ! -e "${GIT_CONFS_DIR_DEST}" ]; then
+    info "Creating directory for git conf"
+    mkdir -p "${GIT_CONFS_DIR_DEST}"
+  fi
+  info "Creating symlink for git confs"
+  ln -snfv "${GIT_CONFS_DIR_SRC}"/*.git "${GIT_CONFS_DIR_DEST}"
+}
+
 setup_peco() {
   title "Setup peco"
 
@@ -186,6 +206,7 @@ download_font
 setup_zsh
 setup_vim
 setup_tmux
+setup_git
 setup_peco
 setup_dotfiles_sync_checker
 post_install_message

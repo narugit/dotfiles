@@ -10,7 +10,7 @@ case `uname` in
 esac
 
 ZSH_CONFS_DIR="${HOME}/.zsh.d"
-ZSH_PRIORITIES_CONF="${ZSH_CONF_DIR}/priorities.conf"
+ZSH_PRIORITIES_CONF="${ZSH_CONFS_DIR}/priorities.conf"
 
 source "${ZSH_PRIORITIES_CONF}"
 

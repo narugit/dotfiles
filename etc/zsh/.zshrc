@@ -1,11 +1,11 @@
 case `uname` in
   Darwin)
-    IS_OSX=true
+    IS_DARWIN=true
     IS_LINUX=false
   ;;
   Linux)
     IS_LINUX=true
-    IS_OSX=false
+    IS_DARWIN=false
   ;;
 esac
 

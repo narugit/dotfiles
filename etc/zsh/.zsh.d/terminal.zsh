@@ -1,6 +1,6 @@
 export TERM="xterm-256color"
 
-if "${IS_OSX}"; then
+if "${IS_DARWIN}"; then
   # ctrl-cがtrapのせいで効かなくなるときのため
   function reset_trap {
     # Hacky hack because of <function/script-that-sets-trap-INT>

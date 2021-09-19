@@ -57,7 +57,7 @@ download_dotfiles() {
     esac
   fi
   git clone https://github.com/narugit/dotfiles.git "${DOTFILES_DIR}"
-  git remote set-url origin git@github.com:narugit/dotfiles.git
+  git remote -C "${DOTFILES_DIR}" set-url origin git@github.com:narugit/dotfiles.git
 }
 
 change_shell() {

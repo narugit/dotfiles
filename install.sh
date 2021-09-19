@@ -92,14 +92,14 @@ setup_tmux() {
 
   local TMUX_DIR_SRC="${DOTFILES_DIR}/etc/tmux"
   local TMUX_DIR_DEST="${HOME}"
-  local TMUX_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/tmux"
+  local TMUX_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/tmux/.tmux.d"
   local TMUX_CONFS_DIR_DEST="${HOME}/.tmux.d"
   info "Creating symlink for tmux"
   ln -snfv "${TMUX_DIR_SRC}/.tmux.conf" "${TMUX_DIR_DEST}/.tmux.conf"
   if [ ! -e "${TMUX_CONFS_DIR_DEST}" ]; then
     mkdir -p "${TMUX_CONFS_DIR_DEST}"
   fi
-  ln -snfv "${TMUX_CONFS_DIR_SRC}/*.tmux" "${TMUX_CONFS_DIR_DEST}/"
+  ln -snfv "${TMUX_CONFS_DIR_SRC}"/*.tmux "${TMUX_CONFS_DIR_DEST}"
 }
 
 setup_dotfiles_sync_checker() {

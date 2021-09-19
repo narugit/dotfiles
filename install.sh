@@ -60,6 +60,22 @@ download_font() {
   title "Downloading font"
 }
 
+setup_zsh() {
+  title "Setup zsh"
+
+  local ZSH_DIR_SRC="${DOTFILES_DIR}/etc/zsh"
+  local ZSH_DIR_DEST="${HOME}"
+  local ZSH_CONFS_DIR_SRC="${ZSH_DIR_SRC}/.zsh.d"
+  local ZSH_CONFS_DIR_DEST="${HOME}/.zsh.d"
+  info "Creating symlink for zshrc"
+  ln -snfv "${ZSH_DIR_SRC}/.zshrc" "${ZSH_DIR_DEST}/.zshrc"
+  if [ ! -e "${ZSH_CONFS_DIR_DEST}" ]; then
+    info "Creating directory for zshrcs"
+    mkdir -p "${ZSH_CONFS_DIR_DEST}"
+  fi
+  ln -snfv "${ZSH_CONFS_DIR_SRC}"/*.zsh "${ZSH_CONFS_DIR_DEST}"
+}
+
 setup_vim() {
   title "Setup vim"
   
@@ -97,6 +113,7 @@ setup_tmux() {
   info "Creating symlink for tmux"
   ln -snfv "${TMUX_DIR_SRC}/.tmux.conf" "${TMUX_DIR_DEST}/.tmux.conf"
   if [ ! -e "${TMUX_CONFS_DIR_DEST}" ]; then
+    info "Creating directory for tmux confs"
     mkdir -p "${TMUX_CONFS_DIR_DEST}"
   fi
   ln -snfv "${TMUX_CONFS_DIR_SRC}"/*.tmux "${TMUX_CONFS_DIR_DEST}"
@@ -110,6 +127,7 @@ setup_dotfiles_sync_checker() {
 download_dotfiles
 change_shell
 download_font
+setup_zsh
 setup_vim
 setup_tmux
 setup_dotfiles_sync_checker

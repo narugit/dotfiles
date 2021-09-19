@@ -9,7 +9,7 @@ case `uname` in
   ;;
 esac
 
-ZSH_CONF_DIR="${HOME}/.zsh.d"
+ZSH_CONFS_DIR="${HOME}/.zsh.d"
 ZSH_PRIORITIES_CONF="${ZSH_CONF_DIR}/priorities.conf"
 
 for zsh_conf in ${ZSH_CONFS}; do

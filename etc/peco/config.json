@@ -1,0 +1,32 @@
+{
+  "Prompt": "❯",
+  "Keymap": {
+    "C-k": "peco.SelectUp",
+    "C-j": "peco.SelectDown"
+  },
+  "Style": {
+    "Basic": [
+      "on_default",
+      "default"
+    ],
+    "SavedSelection": [
+      "bold",
+      "on_160",
+      "230"
+    ],
+    "Selected": [
+      "underline",
+      "on_222",
+      "232"
+    ],
+    "Query": [
+      "002",
+      "bold"
+    ],
+    "Matched": [
+      "198",
+      "bold"
+    ]
+  },
+  "Use256Color": true
+}

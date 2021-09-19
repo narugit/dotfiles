@@ -155,6 +155,19 @@ setup_tmux() {
   ln -snfv "${TMUX_CONFS_DIR_SRC}"/*.tmux "${TMUX_CONFS_DIR_DEST}"
 }
 
+setup_peco() {
+  title "Setup peco"
+
+  local PECO_CONF_DIR_SRC="${DOTFILES_DIR}/etc/peco"
+  local PECO_CONF_DIR_DEST="${HOME}/.config/peco"
+  info "Creating symlink for peco"
+  if [ ! -e "${PECO_CONF_DIR_DEST}" ]; then
+    info "Creating directory for peco conf"
+    mkdir -p "${PECO_CONF_DIR_DEST}"
+  fi
+  ln -snfv "${PECO_CONF_DIR_SRC}/config.json" "${PECO_CONF_DIR_DEST}/config.json"
+}
+
 setup_dotfiles_sync_checker() {
   # register tracker for dotfiles modification
   title "Setup dotfiles sync checker"
@@ -173,6 +186,7 @@ download_font
 setup_zsh
 setup_vim
 setup_tmux
+setup_peco
 setup_dotfiles_sync_checker
 post_install_message
 

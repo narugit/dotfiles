@@ -2,6 +2,7 @@
 DOTFILES_DIR="${HOME}/dotfiles"
 
 source "${DOTFILES_DIR}/bin/log.sh"
+source "${DOTFILES_DIR}/bin/user_config.sh"
 
 case $(uname) in
   Darwin)
@@ -36,12 +37,12 @@ download_dotfiles() {
     fi
   fi
   git clone https://github.com/narugit/dotfiles.git "${DOTFILES_DIR}"
-  (cd "${DOTFILES_DIR}"; git remote set-url origin git@github.com:narugit/dotfiles.git)
+  (cd "${DOTFILES_DIR}" && git remote set-url origin git@github.com:narugit/dotfiles.git)
 }
 
 setup_dotfiles_config() {
-  (cd "${DOTFILES_DIR}" && git config --local user.name "narugit")
-  (cd "${DOTFILES_DIR}" && git config --local user.email "narusens@gmail.com")
+  (cd "${DOTFILES_DIR}" && git config --local user.name "${GIT_CONFIG_LOCAL_USER_NAME}")
+  (cd "${DOTFILES_DIR}" && git config --local user.email "${GIT_CONFIG_LOCAL_USER_EMAIL}")
 }
 
 change_shell() {

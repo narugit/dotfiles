@@ -23,4 +23,4 @@ zinit light-mode for \
 # Install plugins
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit load zsh-users/zsh-syntax-highlighting
-zinit load marzocchi/zsh-notify
+

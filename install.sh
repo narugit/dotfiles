@@ -46,6 +46,14 @@ setup_dotfiles_config() {
   (cd "${DOTFILES_DIR}" && git config --local user.email "${GIT_CONFIG_LOCAL_USER_EMAIL}")
 }
 
+install_packages() {
+  if ${IS_LINUX}; then
+    echo "linux"
+  elif ${IS_DARWIN}; then
+    source "${DOTFILES_DIR}/bin/mac/brew_install.sh"
+  fi
+}
+
 change_shell() {
   # change shell to zsh
   if ${IS_LINUX}; then
@@ -227,6 +235,7 @@ post_install_message() {
 
 download_dotfiles
 setup_dotfiles_config
+install_packages
 change_shell
 download_font
 setup_zsh

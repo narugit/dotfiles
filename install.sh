@@ -32,6 +32,7 @@ download_dotfiles() {
       rm -rf "${DOTFILES_DIR}"
     else
       error "Abort. You need to remove ${DOTFILES_DIR}"
+      exit 1
     fi
   fi
   git clone https://github.com/narugit/dotfiles.git "${DOTFILES_DIR}"
@@ -68,6 +69,7 @@ setup_zsh() {
       rm -rf "${ZSH_CONFS_SYMLINK}"
     else
       error "Abort. You need to remove ${ZSH_CONFS_SYMLINK}"
+      exit 1
     fi
   fi
   info "Creating symlink for zshrc confs"
@@ -99,6 +101,7 @@ setup_vim() {
       rm -rf "${VIM_INIT_SYMLINK}"
     else
       error "Abort. You need to remove ${VIM_INIT_SYMLINK}"
+      exit 1
     fi
   fi
   info "Creating symlink for vimrc (init)"
@@ -113,6 +116,7 @@ setup_vim() {
       rm -rf "${VIM_PLUGIN_SYMLINK}"
     else
       error "Abort. You need to remove ${VIM_PLUGIN_SYMLINK}"
+      exit 1
     fi
   fi
   info "Creating symlink for vimrc (plugin)"
@@ -150,6 +154,7 @@ setup_tmux() {
       rm -rf "${TMUX_CONFS_SYMLINK}"
     else
       error "Abort. You need to remove ${TMUX_CONFS_SYMLINK}"
+      exit 1
     fi
   fi
   info "Creating symlink for tmux confs"

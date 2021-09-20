@@ -13,7 +13,6 @@ title() {
 
 error() {
   echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
-  exit 1
 }
 
 warning() {

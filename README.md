@@ -11,7 +11,9 @@ $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/narugit/dotfiles/maste
 ## Secret Dotfiles
 Secret dotfiles are listed in `.gitignore`.
 
-I suppose that I manage its only in local and not suppose that upload to GitHub because its are secret.
+I suppose that I manage its only in local.
+
+I does not suppose that I upload its to GitHub because its are secret.
 
 ### zsh
 I can add secret configuration, such as secret environment variable in below.

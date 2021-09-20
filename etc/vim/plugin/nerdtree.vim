@@ -1,11 +1,11 @@
-nnoremap <silent><C-\> :NERDTreeTabsToggle<CR>
+nnoremap <silent><C-b> :NERDTreeTabsToggle<CR>
 
 augroup nerdtree_group 
   autocmd! 
 augroup END 
 
 " Lanch nerdtree when lauching vim 
-autocmd nerdtree_group VimEnter * NERDTree
+" autocmd nerdtree_group VimEnter * NERDTree
 " Set cursor to file area
 autocmd nerdtree_group VimEnter * wincmd p
 " Call twice NERDTreeRefreshRoot() when press R to applay icon in new file

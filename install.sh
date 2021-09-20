@@ -48,11 +48,11 @@ setup_dotfiles_config() {
 
 install_packages() {
   if ${IS_LINUX}; then
-    if inquire "Install apt packages?"
+    if inquire "Install apt packages?"; then
       echo "linux"
     fi
   elif ${IS_DARWIN}; then
-    if inquire "Install brew packages?"
+    if inquire "Install brew packages?"; then
       source "${DOTFILES_DIR}/bin/mac/brew_install.sh"
     fi
   fi

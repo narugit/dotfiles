@@ -6,8 +6,9 @@ source "${DOTFILES_DIR}/bin/log.sh"
 
 is_online() {
   local TEST_SERVER_URL="http://google.com"
-  local RETRY_NUM=10 local TIMEOUT_SEC=20
-  wget -q --tries="${RETRY_NUM}" --timeout="${TIMEOUT_SEC}" --spider "${TEST_SERVER_URL}"
+  local RETRY_NUM=1
+  local TIMEOUT_SEC=2
+  http_proxy=${HTTP_PROXY} wget -q --tries="${RETRY_NUM}" --timeout="${TIMEOUT_SEC}" --spider "${TEST_SERVER_URL}"
   if [ "$?" = 0 ]; then
     true
   else
@@ -34,6 +35,6 @@ if is_online; then
     warning "Your local dotfiles differs from remote dotfiles. Please check ${DOTFILES_REMOTE_URL}"
   fi
 else
-  warning "Offline. Please check your internet connection."
+  warning "Offline. Please check your internet connection. Do you set HTTP_PROXY?"
 fi
 

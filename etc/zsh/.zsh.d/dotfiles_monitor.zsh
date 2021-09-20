@@ -1,3 +1,4 @@
+DOTFILES_DIR="${HOME}/dotfiles"
 source "${DOTFILES_DIR}/bin/log.sh"
 
 ACTIVE_HOUR_START=10

@@ -1,3 +1,6 @@
 # secret .zshrc
 .zshrc.secret
 
+# secret .gitconfig
+.gitconfig.secret
+

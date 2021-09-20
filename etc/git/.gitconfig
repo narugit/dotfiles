@@ -4,3 +4,6 @@
   path = ~/.git.d/pager.git
   path = ~/.git.d/core.git
   path = ~/.git.d/init.git
+  # Secret configureation. This file can override above configuration.
+  path = ~/.gitconfig.secret
+

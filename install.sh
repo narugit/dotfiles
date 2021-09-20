@@ -39,6 +39,11 @@ download_dotfiles() {
   (cd "${DOTFILES_DIR}"; git remote set-url origin git@github.com:narugit/dotfiles.git)
 }
 
+setup_dotfiles_config() {
+  (cd "${DOTFILES_DIR}" && git config --local user.name "narugit")
+  (cd "${DOTFILES_DIR}" && git config --local user.email "narusens@gmail.com")
+}
+
 change_shell() {
   # change shell to zsh
   if ${IS_LINUX}; then
@@ -219,6 +224,7 @@ post_install_message() {
 }
 
 download_dotfiles
+setup_dotfiles_config
 change_shell
 download_font
 setup_zsh

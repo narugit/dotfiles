@@ -42,19 +42,26 @@ success() {
   echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
 }
 
+inquire () {
+  warning "$1"
+  while true; do
+    read -p "(y/n): " yn
+      case $yn in
+        [Yy]* ) return 0;;
+        [Nn]* ) return 1;;
+            * ) echo "Please answer yes or no.";;
+      esac
+  done
+}
+
 download_dotfiles() {
   title "Downloading narugit/dotfiles"
   if [ -e "${DOTFILES_DIR}" ]; then
-    warning "Remove ${DOTFILES_DIR}?"
-    read -p "(y/N): " yn
-    case "$yn" in
-      [yY]*)
-        rm -rf "${DOTFILES_DIR}"
-        ;;
-      *)
-        error "Abort. You need to remove ${DOTFILES_DIR}"
-        exit 1;;
-    esac
+    if inquire "Remove ${DOTFILES_DIR}?"; then
+      rm -rf "${DOTFILES_DIR}"
+    else
+      error "Abort. You need to remove ${DOTFILES_DIR}"
+    fi
   fi
   git clone https://github.com/narugit/dotfiles.git "${DOTFILES_DIR}"
   (cd "${DOTFILES_DIR}"; git remote set-url origin git@github.com:narugit/dotfiles.git)
@@ -78,15 +85,22 @@ setup_zsh() {
 
   local ZSH_DIR_SRC="${DOTFILES_DIR}/etc/zsh"
   local ZSH_DIR_DEST="${HOME}"
-  local ZSH_CONFS_DIR_SRC="${ZSH_DIR_SRC}/.zsh.d"
-  local ZSH_CONFS_DIR_DEST="${HOME}/.zsh.d"
   info "Creating symlink for zshrc"
   ln -snfv "${ZSH_DIR_SRC}/.zshrc" "${ZSH_DIR_DEST}/.zshrc"
-  if [ ! -e "${ZSH_CONFS_DIR_DEST}" ]; then
-    info "Creating directory for zshrcs"
-    mkdir -p "${ZSH_CONFS_DIR_DEST}"
+
+  local ZSH_CONFS_DIR_SRC="${ZSH_DIR_SRC}/.zsh.d"
+  local ZSH_CONFS_DIR_DEST="${HOME}"
+  local ZSH_CONFS_SYMLINK="${ZSH_CONFS_DIR_DEST}/.zsh.d"
+  if [ -e "${ZSH_CONFS_SYMLINK}" ]; then
+    if inquire "Remove ${ZSH_CONFS_SYMLINK}?"; then
+      info "Removing directory for zshrc confs"
+      rm -rf "${ZSH_CONFS_SYMLINK}"
+    else
+      error "Abort. You need to remove ${ZSH_CONFS_SYMLINK}"
+    fi
   fi
-  ln -snfv "${ZSH_CONFS_DIR_SRC}"/* "${ZSH_CONFS_DIR_DEST}"
+  info "Creating symlink for zshrc confs"
+  ln -snfv "${ZSH_CONFS_DIR_SRC}" "${ZSH_CONFS_SYMLINK}"
 }
 
 setup_vim() {
@@ -106,22 +120,32 @@ setup_vim() {
   ln -snfv "${VIM_DIR_SRC}/.vimrc" "${VIM_DIR_DEST}/.vimrc"
 
   local VIM_INIT_DIR_SRC="${DOTFILES_DIR}/etc/vim/init"
-  local VIM_INIT_DIR_DEST="${HOME}/.vim/init"
-  if [ ! -e "${VIM_INIT_DIR_DEST}" ]; then
-    info "Creating directory for vimrc (init)"
-    mkdir -p "${VIM_INIT_DIR_DEST}"
+  local VIM_INIT_DIR_DEST="${HOME}/.vim"
+  local VIM_INIT_SYMLINK="${VIM_INIT_DIR_DEST}/init"
+  if [ -e "${VIM_INIT_SYMLINK}" ]; then
+    if inquire "Remove ${VIM_INIT_SYMLINK}?"; then
+      info "Removing directory for vimrc (init)"
+      rm -rf "${VIM_INIT_SYMLINK}"
+    else
+      error "Abort. You need to remove ${VIM_INIT_SYMLINK}"
+    fi
   fi
   info "Creating symlink for vimrc (init)"
-  ln -snfv "${VIM_INIT_DIR_SRC}"/*.vim "${VIM_INIT_DIR_DEST}"
+  ln -snfv "${VIM_INIT_DIR_SRC}" "${VIM_INIT_SYMLINK}"
 
   local VIM_PLUGIN_DIR_SRC="${DOTFILES_DIR}/etc/vim/plugin"
-  local VIM_PLUGIN_DIR_DEST="${HOME}/.vim/plugin"
-  if [ ! -e "${VIM_PLUGIN_DIR_DEST}" ]; then
-    info "Creating directory for vimrc (plugin)"
-    mkdir -p "${VIM_PLUGIN_DIR_DEST}"
+  local VIM_PLUGIN_DIR_DEST="${HOME}/.vim"
+  local VIM_PLUGIN_SYMLINK="${VIM_PLUGIN_DIR_DEST}/plugin"
+  if [ -e "${VIM_PLUGIN_SYMLINK}" ]; then
+    if inquire "Remove ${VIM_PLUGIN_SYMLINK}?"; then
+      info "Removing directory for vimrc (plugin)"
+      rm -rf "${VIM_PLUGIN_SYMLINK}"
+    else
+      error "Abort. You need to remove ${VIM_PLUGIN_SYMLINK}"
+    fi
   fi
   info "Creating symlink for vimrc (plugin)"
-  ln -snfv "${VIM_PLUGIN_DIR_SRC}"/*.vim "${VIM_PLUGIN_DIR_DEST}"
+  ln -snfv "${VIM_PLUGIN_DIR_SRC}" "${VIM_PLUGIN_SYMLINK}"
 
   local DEIN_PLUGINS_DIR_SRC="${VIM_DIR_SRC}/dein"
   local DEIN_PLUGINS_DIR_DEST="${HOME}/.vim/dein/userconfig"
@@ -143,15 +167,22 @@ setup_tmux() {
 
   local TMUX_DIR_SRC="${DOTFILES_DIR}/etc/tmux"
   local TMUX_DIR_DEST="${HOME}"
-  local TMUX_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/tmux/.tmux.d"
-  local TMUX_CONFS_DIR_DEST="${HOME}/.tmux.d"
   info "Creating symlink for tmux"
   ln -snfv "${TMUX_DIR_SRC}/.tmux.conf" "${TMUX_DIR_DEST}/.tmux.conf"
-  if [ ! -e "${TMUX_CONFS_DIR_DEST}" ]; then
-    info "Creating directory for tmux confs"
-    mkdir -p "${TMUX_CONFS_DIR_DEST}"
+
+  local TMUX_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/tmux/.tmux.d"
+  local TMUX_CONFS_DIR_DEST="${HOME}"
+  local TMUX_CONFS_SYMLINK="${TMUX_CONFS_DIR_DEST}/.tmux.d"
+  if [ -e "${TMUX_CONFS_SYMLINK}" ]; then
+    if inquire "Remove ${TMUX_CONFS_SYMLINK}?"; then
+      info "Removing directory for tmux confs"
+      rm -rf "${TMUX_CONFS_SYMLINK}"
+    else
+      error "Abort. You need to remove ${TMUX_CONFS_SYMLINK}"
+    fi
   fi
-  ln -snfv "${TMUX_CONFS_DIR_SRC}"/*.tmux "${TMUX_CONFS_DIR_DEST}"
+  info "Creating symlink for tmux confs"
+  ln -snfv "${TMUX_CONFS_DIR_SRC}" "${TMUX_CONFS_SYMLINK}"
 }
 
 setup_git() {
@@ -167,18 +198,23 @@ setup_git() {
   info "Creating symlink for gitignore"
   if "${IS_DARWIN}"; then
     ln -snfv "${GITIGNORE_DIR_SRC}/.gitignore_global_mac" "${GITIGNORE_DIR_DEST}/.gitignore_global"
-  elif "${IS_LINIX}"; then
+  elif "${IS_LINUX}"; then
     ln -snfv "${GITIGNORE_DIR_SRC}/.gitignore_global_linux" "${GITIGNORE_DIR_DEST}/.gitignore_global"
   fi
 
   local GIT_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/git/.git.d"
-  local GIT_CONFS_DIR_DEST="${HOME}/.git.d"
-  if [ ! -e "${GIT_CONFS_DIR_DEST}" ]; then
-    info "Creating directory for git conf"
-    mkdir -p "${GIT_CONFS_DIR_DEST}"
+  local GIT_CONFS_DIR_DEST="${HOME}"
+  local GIT_CONFS_SYMLINK="${GIT_CONFS_DIR_DEST}/.git.d"
+  if [ -e "${GIT_CONFS_SYMLINK}" ]; then
+    if inquire "Remove ${GIT_CONFS_SYMLINK}?"; then
+      info "Removing directory for git confs"
+      rm -rf "${GIT_CONFS_SYMLINK}"
+    else
+      error "Abort. You need to remove ${GIT_CONFS_SYMLINK}"
+    fi
   fi
   info "Creating symlink for git confs"
-  ln -snfv "${GIT_CONFS_DIR_SRC}"/*.git "${GIT_CONFS_DIR_DEST}"
+  ln -snfv "${GIT_CONFS_DIR_SRC}" "${GIT_CONFS_SYMLINK}"
 }
 
 setup_peco() {

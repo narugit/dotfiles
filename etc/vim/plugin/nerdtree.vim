@@ -1,4 +1,4 @@
-nnoremap <silent><C-b> :NERDTreeTabsToggle<CR>
+nnoremap <silent><C-\> :NERDTreeTabsToggle<CR>
 
 augroup nerdtree_group 
   autocmd! 

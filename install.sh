@@ -106,7 +106,12 @@ setup_ssh() {
 
   local SSH_CONFS_DIR_SRC="${SSH_DIR_SRC}/.config.d"
   local SSH_CONFS_DIR_DEST="${SSH_DIR_DEST}/.config.d"
-  if [ ! -e "${SSH_CONFS_DIR_DEST}" ]; then
+  if [ -e "${SSH_CONFS_DIR_DEST}" ]; then
+    if inquire "Remove ${SSH_CONFS_DIR_DEST}?"; then
+      info "Removing directory for ssh configs"
+      rm -rf "{SSH_CONFS_DIR_DEST}"
+    fi
+  else
     info "Creating directory for ssh configs"
     mkdir -p "{SSH_CONFS_DIR_DEST}"
   fi

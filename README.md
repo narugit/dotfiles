@@ -15,9 +15,9 @@ $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/narugit/dotfiles/maste
 $ ssh-keygen -t ed25519 -C "narusens@gmail.com" -f ~/.ssh/id_rsa_personal
 ```
 
-1. Visit [GitHub's SSH key settings page](https://github.com/settings/keys) and register public key.
+2. Visit [GitHub's SSH key settings page](https://github.com/settings/keys) and register public key.
 
-1. Add key chain.
+3. Add key chain.
 ```console
 $ ssh-add -K ~/.ssh/id_rsa_personal
 ```

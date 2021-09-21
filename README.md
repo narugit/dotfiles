@@ -8,6 +8,20 @@ This is my dotfiles' settings.
 $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/narugit/dotfiles/master/install.sh)"
 ```
 
+## Necessary Process in Manual
+### ssh 
+1. If I does not create `${HOME}/.ssh/id_rsa_personal`, create it.
+```console
+$ ssh-keygen -t ed25519 -C "narusens@gmail.com" -f ~/.ssh/id_rsa_personal
+```
+
+1. Visit [GitHub's SSH key settings page](https://github.com/settings/keys) and register public key.
+
+1. Add key chain.
+```console
+$ ssh-add -K ~/.ssh/id_rsa_personal
+```
+
 ## Secret Dotfiles
 Secret dotfiles are listed in `.gitignore`.
 

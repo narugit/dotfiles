@@ -1,13 +1,5 @@
-case `uname` in
-  Darwin)
-    IS_DARWIN=true
-    IS_LINUX=false
-  ;;
-  Linux)
-    IS_LINUX=true
-    IS_DARWIN=false
-  ;;
-esac
+DOTFILES_DIR="${HOME}/dotfiles"
+source "${DOTFILES_DIR}/bin/check_osname.sh"
 
 ZSH_CONFS_DIR="${HOME}/.zsh.d"
 ZSH_PRIORITIES_CONF="${ZSH_CONFS_DIR}/priorities.conf"

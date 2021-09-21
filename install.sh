@@ -3,16 +3,7 @@ DOTFILES_DIR="${HOME}/dotfiles"
 
 source "${DOTFILES_DIR}/bin/log.sh"
 source "${DOTFILES_DIR}/bin/user_config.sh"
-
-case $(uname) in
-  Darwin)
-    IS_DARWIN=true
-    IS_LINUX=false
-  ;;
-  Linux)
-    IS_LINUX=true IS_DARWIN=false
-  ;;
-esac
+source "${DOTFILES_DIR}/bin/check_osname.sh"
 
 inquire () {
   warning "$1"

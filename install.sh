@@ -1,9 +1,9 @@
 #!/bin/bash -ex
 DOTFILES_DIR="${HOME}/dotfiles"
 
-source "${DOTFILES_BIN_DIR}/log.sh"
+source "${DOTFILES_DIR}/bin/dotfiles_config.sh"
 source "${DOTFILES_BIN_DIR}/user_config.sh"
-source "${DOTFILES_BIN_DIR}/dotfiles_config.sh"
+source "${DOTFILES_BIN_DIR}/log.sh"
 source "${DOTFILES_BIN_DIR}/check_osname.sh"
 
 inquire () {

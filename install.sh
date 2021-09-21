@@ -1,9 +1,10 @@
 #!/bin/bash -ex
 DOTFILES_DIR="${HOME}/dotfiles"
 
-source "${DOTFILES_DIR}/bin/log.sh"
-source "${DOTFILES_DIR}/bin/user_config.sh"
-source "${DOTFILES_DIR}/bin/check_osname.sh"
+source "${DOTFILES_BIN_DIR}/log.sh"
+source "${DOTFILES_BIN_DIR}/user_config.sh"
+source "${DOTFILES_BIN_DIR}/dotfiles_config.sh"
+source "${DOTFILES_BIN_DIR}/check_osname.sh"
 
 inquire () {
   warning "$1"
@@ -18,7 +19,7 @@ inquire () {
 }
 
 download_dotfiles() {
-  title "Downloading narugit/dotfiles"
+  title "Downloading ${DOTFILES_REPO_URL}"
   if [ -e "${DOTFILES_DIR}" ]; then
     if inquire "Remove ${DOTFILES_DIR}?"; then
       rm -rf "${DOTFILES_DIR}"
@@ -27,9 +28,8 @@ download_dotfiles() {
       exit 1
     fi
   fi
-  git clone https://github.com/narugit/dotfiles.git "${DOTFILES_DIR}"
-  local GITHUB_PERSONAL_HOST="github-personal"
-  (cd "${DOTFILES_DIR}" && git remote set-url origin "${GITHUB_PERSONAL_HOST}:narugit/dotfiles.git")
+  git clone "${DOTFILES_REPO_URL}" "${DOTFILES_DIR}"
+  (cd "${DOTFILES_DIR}" && git remote set-url origin "${GITHUB_PERSONAL_HOST}:${DOTFILES_REPO}")
 }
 
 setup_dotfiles_config() {
@@ -45,7 +45,7 @@ install_packages() {
     fi
   elif ${IS_DARWIN}; then
     if inquire "Install brew packages?"; then
-      source "${DOTFILES_DIR}/bin/mac/brew_install.sh"
+      source "${DOTFILES_BIN_DARWIN_DIR}/brew_install.sh"
     fi
   fi
 }
@@ -66,14 +66,9 @@ download_font() {
 setup_zsh() {
   title "Setup zsh"
 
-  local ZSH_DIR_SRC="${DOTFILES_DIR}/etc/zsh"
-  local ZSH_DIR_DEST="${HOME}"
   info "Creating symlink for zshrc"
   ln -snfv "${ZSH_DIR_SRC}/.zshrc" "${ZSH_DIR_DEST}/.zshrc"
 
-  local ZSH_CONFS_DIR_SRC="${ZSH_DIR_SRC}/.zsh.d"
-  local ZSH_CONFS_DIR_DEST="${HOME}"
-  local ZSH_CONFS_SYMLINK="${ZSH_CONFS_DIR_DEST}/.zsh.d"
   if [ -e "${ZSH_CONFS_SYMLINK}" ]; then
     if inquire "Remove ${ZSH_CONFS_SYMLINK}?"; then
       info "Removing directory for zshrc confs"
@@ -90,14 +85,9 @@ setup_zsh() {
 setup_ssh() {
   title "Setup ssh"
 
-  local SSH_DIR_SRC="${DOTFILES_DIR}/etc/ssh"
-  local SSH_DIR_DEST="${HOME}/.ssh"
   info "Creating symlink for ssh config"
   ln -snfv "${SSH_DIR_SRC}/config" "${SSH_DIR_DEST}/config"
 
-  local SSH_CONFS_DIR_SRC="${SSH_DIR_SRC}/.config.d"
-  local SSH_CONFS_DIR_DEST="${SSH_DIR_DEST}"
-  local SSH_CONFS_SYMLINK="${SSH_DIR_DEST}/.config.d"
   if [ -e "${SSH_CONFS_SYMLINK}" ]; then
     if inquire "Remove ${SSH_CONFS_SYMLINK}?"; then
       info "Removing directory for ssh configs"
@@ -115,21 +105,15 @@ setup_vim() {
   title "Setup vim"
   
   info "Downloading color scheme"
-  local VIM_COLOR_DIR="${HOME}/.vim/colors"
   if [ ! -e "${VIM_COLOR_DIR}" ]; then
     info "Creating directory for vim colors"
     mkdir -p "${VIM_COLOR_DIR}"
   fi
   curl -fsSL https://raw.githubusercontent.com/cocopon/iceberg.vim/master/colors/iceberg.vim -o "${VIM_COLOR_DIR}/iceberg.vim"
 
-  local VIM_DIR_SRC="${DOTFILES_DIR}/etc/vim"
-  local VIM_DIR_DEST="${HOME}"
   info "Creating symlink for vimrc"
   ln -snfv "${VIM_DIR_SRC}/.vimrc" "${VIM_DIR_DEST}/.vimrc"
 
-  local VIM_INIT_DIR_SRC="${DOTFILES_DIR}/etc/vim/init"
-  local VIM_INIT_DIR_DEST="${HOME}/.vim"
-  local VIM_INIT_SYMLINK="${VIM_INIT_DIR_DEST}/init"
   if [ -e "${VIM_INIT_SYMLINK}" ]; then
     if inquire "Remove ${VIM_INIT_SYMLINK}?"; then
       info "Removing directory for vimrc (init)"
@@ -142,9 +126,6 @@ setup_vim() {
   info "Creating symlink for vimrc (init)"
   ln -snfv "${VIM_INIT_DIR_SRC}" "${VIM_INIT_SYMLINK}"
 
-  local VIM_PLUGIN_DIR_SRC="${DOTFILES_DIR}/etc/vim/plugin"
-  local VIM_PLUGIN_DIR_DEST="${HOME}/.vim"
-  local VIM_PLUGIN_SYMLINK="${VIM_PLUGIN_DIR_DEST}/plugin"
   if [ -e "${VIM_PLUGIN_SYMLINK}" ]; then
     if inquire "Remove ${VIM_PLUGIN_SYMLINK}?"; then
       info "Removing directory for vimrc (plugin)"
@@ -157,32 +138,24 @@ setup_vim() {
   info "Creating symlink for vimrc (plugin)"
   ln -snfv "${VIM_PLUGIN_DIR_SRC}" "${VIM_PLUGIN_SYMLINK}"
 
-  local DEIN_PLUGINS_DIR_SRC="${VIM_DIR_SRC}/dein"
-  local DEIN_PLUGINS_DIR_DEST="${HOME}/.vim/dein/userconfig"
-  if [ ! -e "${DEIN_PLUGINS_DIR_DEST}" ]; then
+  if [ ! -e "${VIM_DEIN_PLUGINS_DIR_DEST}" ]; then
     info "Creating directory for dein plugins"
-    mkdir -p "${DEIN_PLUGINS_DIR_DEST}"
+    mkdir -p "${VIM_DEIN_PLUGINS_DIR_DEST}"
   fi
   info "Creating symlink for dein plugins"
-  ln -snfv "${DEIN_PLUGINS_DIR_SRC}/plugins.toml" "${DEIN_PLUGINS_DIR_DEST}/plugins.toml"
-  ln -snfv "${DEIN_PLUGINS_DIR_SRC}/plugins_lazy.toml" "${DEIN_PLUGINS_DIR_DEST}/plugins_lazy.toml"
+  ln -snfv "${VIM_DEIN_PLUGINS_DIR_SRC}/plugins.toml" "${VIM_DEIN_PLUGINS_DIR_DEST}/plugins.toml"
+  ln -snfv "${VIM_DEIN_PLUGINS_DIR_SRC}/plugins_lazy.toml" "${VIM_DEIN_PLUGINS_DIR_DEST}/plugins_lazy.toml"
 }
 
 setup_tmux() {
   title "Setup tmux"
 
   info "Install tpm"
-  local TPM_DIR="${HOME}/.tmux/plugins/tpm"
-  git clone https://github.com/tmux-plugins/tpm "${TPM_DIR}"
+  git clone https://github.com/tmux-plugins/tpm "${TMUX_TPM_DIR}"
 
-  local TMUX_DIR_SRC="${DOTFILES_DIR}/etc/tmux"
-  local TMUX_DIR_DEST="${HOME}"
   info "Creating symlink for tmux"
   ln -snfv "${TMUX_DIR_SRC}/.tmux.conf" "${TMUX_DIR_DEST}/.tmux.conf"
 
-  local TMUX_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/tmux/.tmux.d"
-  local TMUX_CONFS_DIR_DEST="${HOME}"
-  local TMUX_CONFS_SYMLINK="${TMUX_CONFS_DIR_DEST}/.tmux.d"
   if [ -e "${TMUX_CONFS_SYMLINK}" ]; then
     if inquire "Remove ${TMUX_CONFS_SYMLINK}?"; then
       info "Removing directory for tmux confs"
@@ -199,23 +172,16 @@ setup_tmux() {
 setup_git() {
   title "Setup git"
   
-  local GIT_CONF_DIR_SRC="${DOTFILES_DIR}/etc/git"
-  local GIT_CONF_DIR_DEST="${HOME}"
   info "Creating symlink for git"
   ln -snfv "${GIT_CONF_DIR_SRC}/.gitconfig" "${GIT_CONF_DIR_DEST}/.gitconfig"
 
-  local GITIGNORE_DIR_SRC="${DOTFILES_DIR}/etc/git"
-  local GITIGNORE_DIR_DEST="${HOME}"
   info "Creating symlink for gitignore"
   if "${IS_DARWIN}"; then
-    ln -snfv "${GITIGNORE_DIR_SRC}/.gitignore_global_mac" "${GITIGNORE_DIR_DEST}/.gitignore_global"
+    ln -snfv "${GIT_IGNORE_DIR_SRC}/.gitignore_global_darwin" "${GIT_IGNORE_DIR_DEST}/.gitignore_global"
   elif "${IS_LINUX}"; then
-    ln -snfv "${GITIGNORE_DIR_SRC}/.gitignore_global_linux" "${GITIGNORE_DIR_DEST}/.gitignore_global"
+    ln -snfv "${GIT_IGNORE_DIR_SRC}/.gitignore_global_linux" "${GIT_IGNORE_DIR_DEST}/.gitignore_global"
   fi
 
-  local GIT_CONFS_DIR_SRC="${DOTFILES_DIR}/etc/git/.git.d"
-  local GIT_CONFS_DIR_DEST="${HOME}"
-  local GIT_CONFS_SYMLINK="${GIT_CONFS_DIR_DEST}/.git.d"
   if [ -e "${GIT_CONFS_SYMLINK}" ]; then
     if inquire "Remove ${GIT_CONFS_SYMLINK}?"; then
       info "Removing directory for git confs"
@@ -231,8 +197,6 @@ setup_git() {
 setup_peco() {
   title "Setup peco"
 
-  local PECO_CONF_DIR_SRC="${DOTFILES_DIR}/etc/peco"
-  local PECO_CONF_DIR_DEST="${HOME}/.config/peco"
   info "Creating symlink for peco"
   if [ ! -e "${PECO_CONF_DIR_DEST}" ]; then
     info "Creating directory for peco conf"

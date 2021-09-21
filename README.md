@@ -40,3 +40,7 @@ The file overrides other global git configuration.
 
 - `${HOME}/.gitconfig.secret`
 
+### ssh
+I can add secret configuration, such as proxy.
+
+- `${HOME}/.ssh/config.secret`

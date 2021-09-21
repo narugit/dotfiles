@@ -1,0 +1,4 @@
+# Secret configuration. List in .gitignore.
+Include config.secret
+Include .conf.d/*
+

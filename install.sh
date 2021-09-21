@@ -37,7 +37,8 @@ download_dotfiles() {
     fi
   fi
   git clone https://github.com/narugit/dotfiles.git "${DOTFILES_DIR}"
-  (cd "${DOTFILES_DIR}" && git remote set-url origin git@github.com:narugit/dotfiles.git)
+  local GITHUB_PERSONAL_HOST="github-personal"
+  (cd "${DOTFILES_DIR}" && git remote set-url origin "${GITHUB_PERSONAL_HOST}:narugit/dotfiles.git")
 }
 
 setup_dotfiles_config() {
@@ -93,6 +94,24 @@ setup_zsh() {
   fi
   info "Creating symlink for zshrc confs"
   ln -snfv "${ZSH_CONFS_DIR_SRC}" "${ZSH_CONFS_SYMLINK}"
+}
+
+setup_ssh() {
+  title "Setup ssh"
+
+  local SSH_DIR_SRC="${DOTFILES_DIR}/etc/ssh"
+  local SSH_DIR_DEST="${HOME}/.ssh"
+  info "Creating symlink for ssh config"
+  ln -snfv "${SSH_DIR_SRC}/config" "${SSH_DIR_DEST}/config"
+
+  local SSH_CONFS_DIR_SRC="${SSH_DIR_SRC}/.config.d"
+  local SSH_CONFS_DIR_DEST="${SSH_DIR_DEST}/.config.d"
+  if [ ! -e "${SSH_CONFS_DIR_DEST}" ]; then
+    info "Creating directory for ssh configs"
+    mkdir -p "{SSH_CONFS_DIR_DEST}"
+  fi
+  info "Creating symlink for ssh confs"
+  ln -snfv "${SSH_CONFS_DIR_SRC}"/*.config "${SSH_CONFS_DIR_DEST}"
 }
 
 setup_vim() {
@@ -243,6 +262,7 @@ install_packages
 change_shell
 download_font
 setup_zsh
+setup_ssh
 setup_vim
 setup_tmux
 setup_git

@@ -4,3 +4,6 @@
 # secret .gitconfig
 .gitconfig.secret
 
+# secret ssh config
+config.secret
+

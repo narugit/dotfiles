@@ -30,7 +30,7 @@ is_hash_same() {
 title "Comparing remote dotfiles"
 if is_online; then
   if is_hash_same; then
-    info "Your local dotfiles is the latest!"
+    success "Your local dotfiles is up to date!"
   else
     warning "Your local dotfiles differs from remote dotfiles. Please check ${DOTFILES_REMOTE_URL}"
   fi

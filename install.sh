@@ -105,20 +105,19 @@ setup_ssh() {
   ln -snfv "${SSH_DIR_SRC}/config" "${SSH_DIR_DEST}/config"
 
   local SSH_CONFS_DIR_SRC="${SSH_DIR_SRC}/.config.d"
-  local SSH_CONFS_DIR_DEST="${SSH_DIR_DEST}/.config.d"
-  if [ -e "${SSH_CONFS_DIR_DEST}" ]; then
-    if inquire "Remove ${SSH_CONFS_DIR_DEST}?"; then
+  local SSH_CONFS_DIR_DEST="${SSH_DIR_DEST}"
+  local SSH_CONFS_SYMLINK="${SSH_DIR_DEST}/.config.d"
+  if [ -e "${SSH_CONFS_SYMLINK}" ]; then
+    if inquire "Remove ${SSH_CONFS_SYMLINK}?"; then
       info "Removing directory for ssh configs"
-      rm -rf "{SSH_CONFS_DIR_DEST}"
+      rm -rf "{SSH_CONFS_SYMLINK}"
     else
-      error "Abort. You need to remove ${SSH_CONFS_DIR_DEST}"
+      error "Abort. You need to remove ${SSH_CONFS_SYMLINK}"
       exit 1
     fi
-    info "Creating directory for ssh configs"
-    mkdir -p "{SSH_CONFS_DIR_DEST}"
   fi
   info "Creating symlink for ssh confs"
-  ln -snfv "${SSH_CONFS_DIR_SRC}"/*.config "${SSH_CONFS_DIR_DEST}"
+  ln -snfv "${SSH_CONFS_DIR_SRC}" "${SSH_CONFS_DIR_DEST}"
 }
 
 setup_vim() {

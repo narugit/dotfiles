@@ -110,8 +110,10 @@ setup_ssh() {
     if inquire "Remove ${SSH_CONFS_DIR_DEST}?"; then
       info "Removing directory for ssh configs"
       rm -rf "{SSH_CONFS_DIR_DEST}"
+    else
+      error "Abort. You need to remove ${SSH_CONFS_DIR_DEST}"
+      exit 1
     fi
-  else
     info "Creating directory for ssh configs"
     mkdir -p "{SSH_CONFS_DIR_DEST}"
   fi

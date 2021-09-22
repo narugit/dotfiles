@@ -5,5 +5,5 @@ export PATH="$PATH:${HOME}/develop/flutter/bin"
 # android-tools
 export PATH="$PATH:${HOME}/Library/Android/sdk/platform-tools"
 # cargo
-export PATH="${HOME}/.cargo/bin:$PATH
+export PATH="${HOME}/.cargo/bin:$PATH"
 

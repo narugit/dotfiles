@@ -285,10 +285,12 @@ backup_dotfiles() {
   
   if inquire "Backup dotfiles?"; then
     IS_WANTED_BACKUP=True
-    if [ ! -e "${DOTFILES_BACKUP_DIR}" ]; then
-      info "Creating ${DOTFILES_BACKUP_DIR}"
-      mkdir -p "${DOTFILES_BACKUP_DIR}"
+    if [ -e "${DOTFILES_BACKUP_DIR}" ]; then
+      info "Removing ${DOTFILES_BACKUP_DIR}"
+      rm -rf "${DOTFILES_BACKUP_DIR}"
     fi
+    info "Creating ${DOTFILES_BACKUP_DIR}"
+    mkdir -p "${DOTFILES_BACKUP_DIR}"
     backup_zsh
     backup_ssh
     backup_vim

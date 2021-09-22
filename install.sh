@@ -96,6 +96,7 @@ install_packages() {
   if ${IS_LINUX}; then
     if inquire "Install apt packages?"; then
       source_remote "bin/linux/apt_install.sh"
+      source_remote "bin/linux/github_release_install.sh"
     fi
   elif ${IS_DARWIN}; then
     if inquire "Install brew packages?"; then

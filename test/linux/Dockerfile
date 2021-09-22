@@ -3,7 +3,6 @@ MAINTAINER narugit
 
 RUN apt update && apt install -y \
   curl \
-  git \
   sudo
 
 ARG TEST_USER

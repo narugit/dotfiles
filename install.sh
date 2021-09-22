@@ -118,7 +118,11 @@ link_ssh() {
     fi
   fi
   info "Creating symlink for ssh confs"
-  ln -snfv "${SSH_CONFS_DIR_SRC}" "${SSH_CONFS_SYMLINK}"
+  if "${IS_DARWIN}"; then
+    ln -snfv "${SSH_CONFS_DIR_SRC_DARWIN}" "${SSH_CONFS_SYMLINK}"
+  elif "${IS_LINUX}"; then
+    ln -snfv "${SSH_CONFS_DIR_SRC_LINUX}" "${SSH_CONFS_SYMLINK}"
+  fi
 }
 
 link_vim() {

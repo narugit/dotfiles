@@ -1,12 +1,32 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 DOTFILES_DIR="${HOME}/dotfiles"
+DOTFILES_TMP_DIR="/tmp/dotfiles"
+DOTFILES_RAW_URL_PREFIX="https://raw.githubusercontent.com/narugit/dotfiles/master"
 
-source "${DOTFILES_DIR}/bin/dotfiles_config.sh"
-source "${DOTFILES_BIN_DIR}/user_config.sh"
-source "${DOTFILES_BIN_DIR}/log.sh"
-source "${DOTFILES_BIN_DIR}/check_osname.sh"
+source_remote() {
+  local file_relative_path="$1"
+  local dir_relative_path=$(dirname ${file_relative_path})
+  local local_target_dir="${DOTFILES_TMP_DIR}/${dir_relative_path}"
+  local local_target_file="${DOTFILES_TMP_DIR}/${file_relative_path}"
+  if [ ! -e "${local_target_dir}" ]; then
+    mkdir -p "${local_target_dir}"
+  fi
+  local remote_file_url="${DOTFILES_RAW_URL_PREFIX}/${file_relative_path}"
+  curl -s ${remote_file_url} -o "${local_target_file}"
+  source "${local_target_file}"
+}
 
-inquire () {
+init() {
+  rm -rf "${DOTFILES_TMP_DIR}"
+  mkdir -p "${DOTFILES_TMP_DIR}"
+  
+  source_remote "bin/dotfiles_config.sh"
+  source_remote "bin/user_config.sh"
+  source_remote "bin/log.sh"
+  source_remote "bin/check_osname.sh"
+}
+
+inquire() {
   warning "$1"
   while true; do
     read -p "(y/n): " yn
@@ -217,6 +237,7 @@ post_install_message() {
   info "For tmux, launch tmux then press \"Prefix + I\""
 }
 
+init
 download_dotfiles
 setup_dotfiles_config
 install_packages

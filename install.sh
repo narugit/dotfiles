@@ -118,7 +118,7 @@ setup_ssh() {
     fi
   fi
   info "Creating symlink for ssh confs"
-  ln -snfv "${SSH_CONFS_DIR_SRC}" "${SSH_CONFS_DIR_DEST}"
+  ln -snfv "${SSH_CONFS_DIR_SRC}" "${SSH_CONFS_SYMLINK}"
 }
 
 setup_vim() {
@@ -170,8 +170,10 @@ setup_vim() {
 setup_tmux() {
   title "Setup tmux"
 
-  info "Install tpm"
-  git clone https://github.com/tmux-plugins/tpm "${TMUX_TPM_DIR}"
+  if [ ! -e "${TMUX_TPM_DIR}" ]; then
+    info "Install tpm"
+    git clone https://github.com/tmux-plugins/tpm "${TMUX_TPM_DIR}"
+  fi
 
   info "Creating symlink for tmux"
   ln -snfv "${TMUX_DIR_SRC}/.tmux.conf" "${TMUX_DIR_DEST}/.tmux.conf"

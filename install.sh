@@ -62,7 +62,7 @@ backup_dir_file() {
   local dest="${DOTFILES_BACKUP_DIR}/${dest_dirname}"
   if [ -e "${target}" ]; then
     info "Backup ${target} to ${dest}"
-    if [ -e ${dest} ]; then
+    if [ ! -e ${dest} ]; then
       info "Creating ${dest}"
       mkdir -p "${dest}"
     fi 

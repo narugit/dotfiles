@@ -8,6 +8,7 @@ set smartindent
 set showmatch
 set laststatus=2
 syntax on
+set background=dark
 colorscheme iceberg
 set t_Co=256
 set list listchars=tab:\▸\-

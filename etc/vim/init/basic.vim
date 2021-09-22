@@ -19,4 +19,4 @@ set smartcase
 set incsearch
 set wrapscan
 set hlsearch
-set timeoutlen=100
+

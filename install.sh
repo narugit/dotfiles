@@ -107,12 +107,11 @@ install_packages() {
   fi
 }
 
-change_shell() {
-  # change shell to zsh
-  if ${IS_LINUX}; then
-    info "linux"
-    # Linux's default shell is bash, so change to zsh
-  fi
+setup_default_shell() {
+  title "Setup default shell"
+
+  info "Setting defalut shell as zsh"
+  chsh -s $(which zsh) $(whoami)
 }
 
 download_font() {
@@ -319,16 +318,16 @@ install_dotfiles() {
 post_install_message() {
   title "Command to enable some package"
   
-  info "For zsh, \"$ source ~/.zshrc\" or launch zsh."
+  info "For zsh, relogin \"su - $\(whoami\)\" or reload by \"$ source ~/.zshrc\"."
   info "For tmux, launch tmux then press \"Prefix + I\"."
 }
 
 init
 backup_dotfiles
 install_packages
+setup_default_shell
 download_dotfiles
 setup_dotfiles_config
-change_shell
 download_font
 install_dotfiles
 post_install_message

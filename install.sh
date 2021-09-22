@@ -282,6 +282,7 @@ backup_dotfiles() {
   if inquire "Backup dotfiles?"; then
     IS_WANTED_BACKUP=True
     if [ ! -e "${DOTFILES_BACKUP_DIR}" ]; then
+      info "Creating ${DOTFILES_BACKUP_DIR}"
       mkdir -p "${DOTFILES_BACKUP_DIR}"
     fi
     backup_zsh

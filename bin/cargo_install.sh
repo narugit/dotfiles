@@ -35,10 +35,10 @@ command_exists() {
 install_rustup() {
   title "Install rustup"
   if command_exists "rustup"; then
+    info "Already installed rustup"
+  else
     info "Installing rustup"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  else
-    info "Already installed rustup"
   fi
 }
 
@@ -68,6 +68,7 @@ install_packages() {
   done
 }
 
+init
 install_rustup
 install_packages
 

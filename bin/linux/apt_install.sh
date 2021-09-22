@@ -48,6 +48,7 @@ install_packages() {
     "peco"
     "python3"
     "python3-pip"
+    "tmux"
     "tree"
     "vim"
     "wget"

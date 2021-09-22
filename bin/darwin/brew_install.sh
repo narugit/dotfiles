@@ -53,6 +53,7 @@ install_packages() {
     "jq"
     "peco"
     "python3"
+    "tmux"
     "tree"
     "wget"
     "youtube-dl"

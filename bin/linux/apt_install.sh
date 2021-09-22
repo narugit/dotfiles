@@ -37,6 +37,7 @@ install_packages() {
 
   local PACKAGES=(
     "bat"
+    "gcc"
     "git"
     "vim"
     "wget"

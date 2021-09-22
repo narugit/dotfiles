@@ -93,6 +93,9 @@ setup_dotfiles_config() {
 }
 
 install_packages() {
+  if inquire "Install cargo packages?"; then
+    source_remote "bin/cargo_install.sh"
+  fi
   if ${IS_LINUX}; then
     if inquire "Install apt packages?"; then
       source_remote "bin/linux/apt_install.sh"

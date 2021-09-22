@@ -23,9 +23,28 @@ init() {
   source_remote "bin/log.sh"
 }
 
+command_exists() {
+  local command="$1"
+  if which "$command" >/dev/null 2>&1; then
+    true
+  else
+    false
+  fi
+}
+
+install_rustup() {
+  title "Install rustup"
+  if command_exists "rustup"; then
+    info "Installing rustup"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  else
+    info "Already installed rustup"
+  fi
+}
+
 has_package() {
   local package="$1"
-  if dpkg -s "$package" >/dev/null 2>&1; then
+  if cargo install --list | grep "$package" >/dev/null 2>&1; then
     true
   else
     false
@@ -33,14 +52,10 @@ has_package() {
 }
 
 install_packages() {
-  title "Installing packages"
+  title "Install packages"
 
   local PACKAGES=(
-    "bat"
-    "git"
-    "vim"
-    "wget"
-    "zsh"
+    "git-delta"
   )
 
   for package in "${PACKAGES[@]}"; do
@@ -48,12 +63,11 @@ install_packages() {
       info "Already installed ${package}"
     else
       info "Installing ${package}"
-      sudo apt install -y "${package}"
+      PATH="${HOME}/.cargo/bin:${PATH}" cargo install "${package}" 
     fi
   done
 }
 
-
-init
+install_rustup
 install_packages
 

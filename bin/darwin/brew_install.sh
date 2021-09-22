@@ -49,7 +49,6 @@ install_packages() {
     "cmake"
     "ffmpeg"
     "git"
-    "git-delta"
     "jq"
     "peco"
     "python3"

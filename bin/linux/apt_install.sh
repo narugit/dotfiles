@@ -36,11 +36,22 @@ install_packages() {
   title "Installing packages"
 
   local PACKAGES=(
+    "aria2"
+    "atool"
     "bat"
+    "cmake"
+    "ffmpeg"
     "gcc"
     "git"
+    "jq"
+    "keychain"
+    "peco"
+    "python3"
+    "python3-pip"
+    "tree"
     "vim"
     "wget"
+    "youtube-dl"
     "zsh"
   )
 

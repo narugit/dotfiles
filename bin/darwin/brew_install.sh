@@ -45,6 +45,7 @@ install_packages() {
   local PACKAGES=(
     "aman"
     "aria2"
+    "atool"
     "bat"
     "cmake"
     "ffmpeg"

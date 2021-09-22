@@ -95,11 +95,11 @@ setup_dotfiles_config() {
 install_packages() {
   if ${IS_LINUX}; then
     if inquire "Install apt packages?"; then
-      source "${DOTFILES_BIN_LINUX_DIR}/apt_install.sh"
+      source_remote "bin/linux/apt_install.sh"
     fi
   elif ${IS_DARWIN}; then
     if inquire "Install brew packages?"; then
-      source "${DOTFILES_BIN_DARWIN_DIR}/brew_install.sh"
+      source_remote "bin/darwin/brew_install.sh"
     fi
   fi
 }

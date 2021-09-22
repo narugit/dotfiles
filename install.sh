@@ -319,8 +319,8 @@ install_dotfiles() {
 post_install_message() {
   title "Command to enable some package"
   
-  info "For zsh, \"$ source ~/.zshrc\""
-  info "For tmux, launch tmux then press \"Prefix + I\""
+  info "For zsh, \"$ source ~/.zshrc\" or launch zsh."
+  info "For tmux, launch tmux then press \"Prefix + I\"."
 }
 
 init

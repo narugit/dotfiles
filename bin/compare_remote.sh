@@ -20,6 +20,12 @@ is_hash_same() {
   local DOTFILES_DEFAULT_BRANCH=$(cd ${DOTFILES_DIR} && git remote show origin | sed -n '/HEAD branch/s/.*: //p')
   local DOTFILES_REMOTE_HASH=$(cd ${DOTFILES_DIR} && git ls-remote origin HEAD | awk '{print $1}')
   local DOTFILES_LOCAL_HASH=$(cd ${DOTFILES_DIR} && git rev-parse ${DOTFILES_DEFAULT_BRANCH})
+
+  if [ -z "${DOTFILES_REMOTE_HASH}" ]; then
+    error "Please set ${HOME}/.ssh/id_rsa_personal"
+    exit 1
+  fi
+
   if [ "${DOTFILES_LOCAL_HASH}" = "${DOTFILES_REMOTE_HASH}" ]; then
     true
   else

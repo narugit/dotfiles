@@ -56,7 +56,7 @@ install_aman() {
   else
     info "Installing aman"
     (cd "${downloaded_path}" && tar -zxvf "${downloaded_file}" &> /dev/null)
-    mv "${downloaded_path}/${package_name}" "${INSTALL_DEST}/${package_name}"
+    sudo mv "${downloaded_path}/${package_name}" "${INSTALL_DEST}/${package_name}"
   fi
 }
 

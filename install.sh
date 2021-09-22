@@ -2,7 +2,7 @@
 DOTFILES_DIR="${HOME}/dotfiles"
 DOTFILES_TMP_DIR="/tmp/dotfiles"
 DOTFILES_RAW_URL_PREFIX="https://raw.githubusercontent.com/narugit/dotfiles/master"
-IS_WANTED_BACKUP=True
+IS_WANTED_BACKUP=true
 
 source_remote() {
   local file_relative_path="$1"
@@ -284,7 +284,7 @@ backup_dotfiles() {
   title "Backup dotfiles"
   
   if inquire "Backup dotfiles?"; then
-    IS_WANTED_BACKUP=True
+    IS_WANTED_BACKUP=true
     if [ -e "${DOTFILES_BACKUP_DIR}" ]; then
       info "Removing ${DOTFILES_BACKUP_DIR}"
       rm -rf "${DOTFILES_BACKUP_DIR}"
@@ -298,7 +298,7 @@ backup_dotfiles() {
     backup_git
     backup_peco
   else
-    IS_WANTED_BACKUP=False
+    IS_WANTED_BACKUP=false
   fi
 }
 

@@ -83,7 +83,7 @@ download_font() {
   title "Downloading font"
 }
 
-setup_zsh() {
+link_zsh() {
   title "Setup zsh"
 
   info "Creating symlink for zshrc"
@@ -102,7 +102,7 @@ setup_zsh() {
   ln -snfv "${ZSH_CONFS_DIR_SRC}" "${ZSH_CONFS_SYMLINK}"
 }
 
-setup_ssh() {
+link_ssh() {
   title "Setup ssh"
 
   info "Creating symlink for ssh config"
@@ -121,7 +121,7 @@ setup_ssh() {
   ln -snfv "${SSH_CONFS_DIR_SRC}" "${SSH_CONFS_SYMLINK}"
 }
 
-setup_vim() {
+link_vim() {
   title "Setup vim"
   
   info "Downloading color scheme"
@@ -167,7 +167,7 @@ setup_vim() {
   ln -snfv "${VIM_DEIN_PLUGINS_DIR_SRC}/plugins_lazy.toml" "${VIM_DEIN_PLUGINS_DIR_DEST}/plugins_lazy.toml"
 }
 
-setup_tmux() {
+link_tmux() {
   title "Setup tmux"
 
   if [ ! -e "${TMUX_TPM_DIR}" ]; then
@@ -191,7 +191,7 @@ setup_tmux() {
   ln -snfv "${TMUX_CONFS_DIR_SRC}" "${TMUX_CONFS_SYMLINK}"
 }
 
-setup_git() {
+link_git() {
   title "Setup git"
   
   info "Creating symlink for git"
@@ -216,7 +216,7 @@ setup_git() {
   ln -snfv "${GIT_CONFS_DIR_SRC}" "${GIT_CONFS_SYMLINK}"
 }
 
-setup_peco() {
+link_peco() {
   title "Setup peco"
 
   info "Creating symlink for peco"
@@ -227,9 +227,13 @@ setup_peco() {
   ln -snfv "${PECO_CONF_DIR_SRC}/config.json" "${PECO_CONF_DIR_DEST}/config.json"
 }
 
-setup_dotfiles_sync_checker() {
-  # register tracker for dotfiles modification
-  title "Setup dotfiles sync checker"
+install_dotfiles() {
+  link_zsh
+  link_ssh
+  link_vim
+  link_tmux
+  link_git
+  link_peco
 }
 
 post_install_message() {
@@ -245,13 +249,8 @@ setup_dotfiles_config
 install_packages
 change_shell
 download_font
-setup_zsh
-setup_ssh
-setup_vim
-setup_tmux
-setup_git
-setup_peco
-setup_dotfiles_sync_checker
+install_dotfiles
 post_install_message
 
 success "Install successful."
+

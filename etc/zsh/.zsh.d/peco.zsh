@@ -1,6 +1,7 @@
-HISTFILE=~/.zsh-history
-HISTORY=1000000
-SAVEHIST=1000000
+export HISTFILE=~/.zsh-history
+export HISTORY=1000000
+export HISTSIZE=1000000
+export SAVEHIST=1000000
 
 # 履歴をインクリメンタルに追加
 setopt inc_append_history
@@ -16,14 +17,11 @@ setopt hist_ignore_dups
 setopt hist_ignore_all_dups
 
 function peco-select-history() {
-    case ${OSTYPE} in
-        darwin*)
-        BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
-        ;;
-        linux*)
-        BUFFER=$(\cat ~/.zsh-history | sed -e 's/^:.*[0^9]\+:[0-9]\+;//g' | awk '!a[$0]++' | peco)
-        ;;
-    esac
+  if "${IS_DARWIN}"; then
+    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+  elif "${IS_LINUX}"; then
+    BUFFER=$(\cat ~/.zsh-history | tac | sed -e 's/^:.*[0-9]\+:[0-9]\+;//g' | awk '!a[$0]++' | peco)
+  fi
   CURSOR=$#BUFFER
   zle clear-screen
 }

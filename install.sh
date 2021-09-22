@@ -116,8 +116,12 @@ install_packages() {
 setup_default_shell() {
   title "Setup default shell"
 
-  info "Setting defalut shell as zsh"
-  chsh -s $(which zsh) $(whoami)
+  if echo "${SHELL}" | grep zsh &> /dev/null; then
+    info "Already set default shell as zsh"
+  else
+    info "Setting defalut shell as zsh"
+    chsh -s $(which zsh) $(whoami)
+  fi
 }
 
 download_font() {

@@ -25,6 +25,8 @@ init() {
   source_remote "bin/user_config.sh"
   source_remote "bin/log.sh"
   source_remote "bin/check_osname.sh"
+
+  cd "${HOME}"
 }
 
 inquire() {

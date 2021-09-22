@@ -27,12 +27,20 @@ is_hash_same() {
   fi
 }
 
+is_local_clean() {
+  if [ -z "$(git status --porcelain)" ]; then
+    true
+  else
+    false
+  fi
+}
+
 title "Comparing remote dotfiles"
 if is_online; then
-  if is_hash_same; then
+  if is_hash_same && is_local_clean; then
     success "Your local dotfiles is up to date!"
   else
-    warning "Your local dotfiles differs from remote dotfiles. Please check ${DOTFILES_REMOTE_URL}"
+    warning "Your local dotfiles differs from remote dotfiles. Please check ${DOTFILES_DIR} and ${DOTFILES_REMOTE_URL}"
   fi
 else
   warning "Offline. Please check your internet connection. Do you set HTTP_PROXY?"

@@ -2,6 +2,7 @@
 DOTFILES_DIR="${HOME}/dotfiles"
 DOTFILES_TMP_DIR="/tmp/dotfiles"
 DOTFILES_RAW_URL_PREFIX="https://raw.githubusercontent.com/narugit/dotfiles/master"
+IS_WANTED_BACKUP=True
 
 source_remote() {
   local file_relative_path="$1"
@@ -36,6 +37,33 @@ inquire() {
             * ) echo "Please answer yes or no.";;
       esac
   done
+}
+
+safety_remove() {
+  local target="$1"
+  local remove_message="Removing ${target}"
+  if "${IS_WANTED_BACKUP}"; then
+    info "${remove_message}"
+    rm -rf "${target}"
+  else
+    if inquire "Remove ${target}?"; then
+      info "${remove_message}"
+      rm -rf "${target}"
+    else
+      error "Abort. You need to remove ${target}"
+      exit 1
+    fi
+  fi
+}
+
+backup_dir_file() {
+  local target="$1"
+  local dest_dirname="$2"
+  local dest="${DOTFILES_BACKUP_DIR}/${dest_dirname}"
+  if [ -e "${target}" ]; then
+    info "Backup ${target} to ${dest}"
+    yes | cp -RL "${target}" "${dest}"
+  fi
 }
 
 download_dotfiles() {
@@ -83,6 +111,14 @@ download_font() {
   title "Downloading font"
 }
 
+backup_zsh() {
+  title "Backup zsh"
+  local zsh_dir="zsh"
+
+  backup_dir_file "${ZSH_DIR_DEST}/.zshrc" "${zsh_dir}"
+  backup_dir_file "${ZSH_CONFS_SYMLINK}" "${zsh_dir}"
+}
+
 link_zsh() {
   title "Setup zsh"
 
@@ -90,16 +126,18 @@ link_zsh() {
   ln -snfv "${ZSH_DIR_SRC}/.zshrc" "${ZSH_DIR_DEST}/.zshrc"
 
   if [ -e "${ZSH_CONFS_SYMLINK}" ]; then
-    if inquire "Remove ${ZSH_CONFS_SYMLINK}?"; then
-      info "Removing directory for zshrc confs"
-      rm -rf "${ZSH_CONFS_SYMLINK}"
-    else
-      error "Abort. You need to remove ${ZSH_CONFS_SYMLINK}"
-      exit 1
-    fi
+    safety_remove "${ZSH_CONFS_SYMLINK}"
   fi
   info "Creating symlink for zshrc confs"
   ln -snfv "${ZSH_CONFS_DIR_SRC}" "${ZSH_CONFS_SYMLINK}"
+}
+
+backup_ssh() {
+  title "Backup ssh"
+  local ssh_dir="ssh"
+
+  backup_dir_file "${SSH_DIR_DEST}/config" "${ssh_dir}"
+  backup_dir_file "${SSH_CONFS_SYMLINK}" "${ssh_dir}"
 }
 
 link_ssh() {
@@ -109,13 +147,7 @@ link_ssh() {
   ln -snfv "${SSH_DIR_SRC}/config" "${SSH_DIR_DEST}/config"
 
   if [ -e "${SSH_CONFS_SYMLINK}" ]; then
-    if inquire "Remove ${SSH_CONFS_SYMLINK}?"; then
-      info "Removing directory for ssh configs"
-      rm -rf "{SSH_CONFS_SYMLINK}"
-    else
-      error "Abort. You need to remove ${SSH_CONFS_SYMLINK}"
-      exit 1
-    fi
+    safety_remove "${SSH_CONFS_SYMLINK}"
   fi
   info "Creating symlink for ssh confs"
   if "${IS_DARWIN}"; then
@@ -123,6 +155,18 @@ link_ssh() {
   elif "${IS_LINUX}"; then
     ln -snfv "${SSH_CONFS_DIR_SRC_LINUX}" "${SSH_CONFS_SYMLINK}"
   fi
+}
+
+backup_vim() {
+  title "Backup vim"
+  local vim_dir="vim"
+
+  backup_dir_file "${VIM_COLOR_DIR}" "${vim_dir}"
+  backup_dir_file "${VIM_DIR_DEST}/.vimrc" "${vim_dir}"
+  backup_dir_file "${VIM_INIT_SYMLINK}" "${vim_dir}"
+  backup_dir_file "${VIM_PLUGIN_SYMLINK}" "${vim_dir}"
+  backup_dir_file "${VIM_DEIN_PLUGINS_DIR_DEST}/plugins.toml" "${vim_dir}"
+  backup_dir_file "${VIM_DEIN_PLUGINS_DIR_DEST}/plugins_lazy.toml" "${vim_dir}"
 }
 
 link_vim() {
@@ -139,25 +183,13 @@ link_vim() {
   ln -snfv "${VIM_DIR_SRC}/.vimrc" "${VIM_DIR_DEST}/.vimrc"
 
   if [ -e "${VIM_INIT_SYMLINK}" ]; then
-    if inquire "Remove ${VIM_INIT_SYMLINK}?"; then
-      info "Removing directory for vimrc (init)"
-      rm -rf "${VIM_INIT_SYMLINK}"
-    else
-      error "Abort. You need to remove ${VIM_INIT_SYMLINK}"
-      exit 1
-    fi
+    safety_remove "${VIM_INIT_SYMLINK}"
   fi
   info "Creating symlink for vimrc (init)"
   ln -snfv "${VIM_INIT_DIR_SRC}" "${VIM_INIT_SYMLINK}"
 
   if [ -e "${VIM_PLUGIN_SYMLINK}" ]; then
-    if inquire "Remove ${VIM_PLUGIN_SYMLINK}?"; then
-      info "Removing directory for vimrc (plugin)"
-      rm -rf "${VIM_PLUGIN_SYMLINK}"
-    else
-      error "Abort. You need to remove ${VIM_PLUGIN_SYMLINK}"
-      exit 1
-    fi
+    safety_remove "${VIM_PLUGIN_SYMLINK}"
   fi
   info "Creating symlink for vimrc (plugin)"
   ln -snfv "${VIM_PLUGIN_DIR_SRC}" "${VIM_PLUGIN_SYMLINK}"
@@ -169,6 +201,14 @@ link_vim() {
   info "Creating symlink for dein plugins"
   ln -snfv "${VIM_DEIN_PLUGINS_DIR_SRC}/plugins.toml" "${VIM_DEIN_PLUGINS_DIR_DEST}/plugins.toml"
   ln -snfv "${VIM_DEIN_PLUGINS_DIR_SRC}/plugins_lazy.toml" "${VIM_DEIN_PLUGINS_DIR_DEST}/plugins_lazy.toml"
+}
+
+backup_tmux() {
+  title "Backup tmux"
+  local tmux_dir="tmux"
+
+  backup_dir_file "${TMUX_DIR_DEST}/.tmux.conf" "${tmux_dir}"
+  backup_dir_file "${TMUX_CONFS_SYMLINK}" "${tmux_dir}"
 }
 
 link_tmux() {
@@ -183,16 +223,19 @@ link_tmux() {
   ln -snfv "${TMUX_DIR_SRC}/.tmux.conf" "${TMUX_DIR_DEST}/.tmux.conf"
 
   if [ -e "${TMUX_CONFS_SYMLINK}" ]; then
-    if inquire "Remove ${TMUX_CONFS_SYMLINK}?"; then
-      info "Removing directory for tmux confs"
-      rm -rf "${TMUX_CONFS_SYMLINK}"
-    else
-      error "Abort. You need to remove ${TMUX_CONFS_SYMLINK}"
-      exit 1
-    fi
+    safety_remove "${TMUX_CONFS_SYMLINK}"
   fi
   info "Creating symlink for tmux confs"
   ln -snfv "${TMUX_CONFS_DIR_SRC}" "${TMUX_CONFS_SYMLINK}"
+}
+
+backup_git() {
+  title "Backup git"
+  local git_dir="git"
+
+  backup_dir_file "${GIT_CONF_DIR_DEST}/.gitconfig" "${git_dir}"
+  backup_dir_file "${GIT_IGNORE_DIR_DEST}/.gitignore_global" "${git_dir}"
+  backup_dir_file "${GIT_CONFS_SYMLINK}" "${git_dir}"
 }
 
 link_git() {
@@ -209,15 +252,17 @@ link_git() {
   fi
 
   if [ -e "${GIT_CONFS_SYMLINK}" ]; then
-    if inquire "Remove ${GIT_CONFS_SYMLINK}?"; then
-      info "Removing directory for git confs"
-      rm -rf "${GIT_CONFS_SYMLINK}"
-    else
-      error "Abort. You need to remove ${GIT_CONFS_SYMLINK}"
-    fi
+    safety_remove "${GIT_CONFS_SYMLINK}"
   fi
   info "Creating symlink for git confs"
   ln -snfv "${GIT_CONFS_DIR_SRC}" "${GIT_CONFS_SYMLINK}"
+}
+
+backup_peco() {
+  title "Backup peco"
+  local peco_dir
+
+  backup_dir_file "${PECO_CONF_DIR_DEST}/config.json" "${peco_dir}"
 }
 
 link_peco() {
@@ -229,6 +274,22 @@ link_peco() {
     mkdir -p "${PECO_CONF_DIR_DEST}"
   fi
   ln -snfv "${PECO_CONF_DIR_SRC}/config.json" "${PECO_CONF_DIR_DEST}/config.json"
+}
+
+backup_dotfiles() {
+  title "Backup dotfiles"
+  
+  if inquire "Backup dotfiles?"; then
+    IS_WANTED_BACKUP=True
+    backup_zsh
+    backup_ssh
+    backup_vim
+    backup_tmux
+    backup_git
+    backup_peco
+  else
+    IS_WANTED_BACKUP=False
+  fi
 }
 
 install_dotfiles() {
@@ -248,6 +309,7 @@ post_install_message() {
 }
 
 init
+backup_dotfiles
 download_dotfiles
 setup_dotfiles_config
 install_packages

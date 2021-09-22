@@ -1,5 +1,5 @@
 DOTFILES_DIR="${HOME}/dotfiles"
-source "${DOTFILES_DIR}/bin/check_osname.sh"
+source "${DOTFILES_DIR}/bin/check_os.sh"
 
 ZSH_CONFS_DIR="${HOME}/.zsh.d"
 ZSH_PRIORITIES_CONF="${ZSH_CONFS_DIR}/priorities.conf"

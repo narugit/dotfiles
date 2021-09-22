@@ -24,7 +24,6 @@ init() {
   source_remote "bin/dotfiles_config.sh"
   source_remote "bin/user_config.sh"
   source_remote "bin/log.sh"
-  source_remote "bin/check_osname.sh"
 
   cd "${HOME}"
 }
@@ -70,6 +69,10 @@ backup_dir_file() {
     fi 
     yes | cp -RL "${target}" "${dest}"
   fi
+}
+
+check_os() {
+  source_remote "bin/check_os.sh"
 }
 
 download_dotfiles() {
@@ -324,6 +327,7 @@ post_install_message() {
 }
 
 init
+check_os
 backup_dotfiles
 install_packages
 setup_default_shell

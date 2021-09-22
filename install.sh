@@ -95,7 +95,7 @@ setup_dotfiles_config() {
 install_packages() {
   if ${IS_LINUX}; then
     if inquire "Install apt packages?"; then
-      echo "linux"
+      source "${DOTFILES_BIN_LINUX_DIR}/apt_install.sh"
     fi
   elif ${IS_DARWIN}; then
     if inquire "Install brew packages?"; then
@@ -322,9 +322,9 @@ post_install_message() {
 
 init
 backup_dotfiles
+install_packages
 download_dotfiles
 setup_dotfiles_config
-install_packages
 change_shell
 download_font
 install_dotfiles

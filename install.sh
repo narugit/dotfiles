@@ -72,7 +72,9 @@ backup_dir_file() {
 }
 
 check_os() {
+  title "Check whether OS is supported"
   source_remote "bin/check_os.sh"
+  info "OS is supported."
 }
 
 download_dotfiles() {

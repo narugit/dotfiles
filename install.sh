@@ -318,7 +318,7 @@ install_dotfiles() {
 post_install_message() {
   title "Command to enable some package"
   
-  info "For zsh, relogin \"su - $\(whoami\)\" or reload by \"$ source ~/.zshrc\"."
+  info "For zsh, relogin \"su - $(whoami)\" or reload by \"$ source ~/.zshrc\"."
   info "For tmux, launch tmux then press \"Prefix + I\"."
 }
 

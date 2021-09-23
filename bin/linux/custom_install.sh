@@ -2,6 +2,7 @@
 DOTFILES_DIR="${HOME}/dotfiles"
 DOTFILES_TMP_DIR="/tmp/dotfiles"
 DOTFILES_RAW_URL_PREFIX="https://raw.githubusercontent.com/narugit/dotfiles/master"
+INSTALL_DEST="/usr/local/bin"
 
 source_remote() {
   local file_relative_path="$1"

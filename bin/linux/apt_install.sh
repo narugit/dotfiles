@@ -35,8 +35,7 @@ has_package() {
 
 install_packages() {
   title "Installing packages"
-
-  pns=$(get_pns "${ABBREV_COMMAND}" "linux" "apt")
+  pns=$(get_pns "linux" "apt")
   for v in ${pns[@]}
   do
     local package=$(echo $v | awk -F',' '{ print $1 }')
@@ -48,7 +47,6 @@ install_packages() {
     fi
   done
 }
-
 
 init
 install_packages

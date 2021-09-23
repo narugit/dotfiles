@@ -16,6 +16,7 @@ ABBREV_OS="os"
 CSV_URL="${DOTFILES_RAW_URL_PREFIX}/data/packages.csv"
 CSV_DIR="${DOTFILES_TMP_DIR}/data"
 CSV="${CSV_DIR}/packages.csv"
+CSV="data/packages.csv"
 
 download_csv() {
   if [ ! -e "${CSV_DIR}" ]; then
@@ -31,16 +32,16 @@ get_index_from_col() {
 
 get_pns() {
   local os="$1"
-  local install_by="$2"
+  local inst_by="$2"
   local loc_col_head=$(get_index_from_col "${COL_HEAD}") 
   local loc_col_command=$(get_index_from_col "${COL_COMMAND}") 
   local loc_col_repository=$(get_index_from_col "${COL_REPOSITORY}") 
   local loc_col_install_by=$(get_index_from_col "${COL_INSTALL_BY}") 
   local loc_col_os=$(get_index_from_col "${COL_OS}") 
   local values=()
-  while IFS="," read -r v_pn v_cmd v_repo v_install_by v_os
+  while IFS="," read -r v_pn v_cmd v_repo v_inst_by v_os
   do
-    if echo "${v_os}${v_install_by}" | grep -x "${os}${install_by}" &> /dev/null; then
+    if echo "${v_os}${v_inst_by}" | grep -x "${os}${inst_by}" &> /dev/null; then
       values+=("${v_pn}")
     fi
   done < <(cut -d "," -f${loc_col_head},${loc_col_command},${loc_col_repository},${loc_col_install_by},${loc_col_os} "${CSV}" | tail -n +2)
@@ -52,16 +53,16 @@ get_pns() {
 get_pn_any() {
   local any="v_$1"
   local os="$2"
-  local install_by="$3"
+  local inst_by="$3"
   local loc_col_head=$(get_index_from_col "${COL_HEAD}") 
   local loc_col_command=$(get_index_from_col "${COL_COMMAND}") 
   local loc_col_repository=$(get_index_from_col "${COL_REPOSITORY}") 
   local loc_col_install_by=$(get_index_from_col "${COL_INSTALL_BY}") 
   local loc_col_os=$(get_index_from_col "${COL_OS}") 
   local values=()
-  while IFS="," read -r v_pn v_cmd v_repo v_install_by v_os
+  while IFS="," read -r v_pn v_cmd v_repo v_inst_by v_os
   do
-    if echo "${v_os}${v_install_by}" | grep -x "${os}${install_by}" &> /dev/null; then
+    if echo "${v_os}${v_inst_by}" | grep -x "${os}${inst_by}" &> /dev/null; then
       values+=("${v_pn},${!any}")
     fi
   done < <(cut -d "," -f${loc_col_head},${loc_col_command},${loc_col_repository},${loc_col_install_by},${loc_col_os} "${CSV}" | tail -n +2)
@@ -69,3 +70,4 @@ get_pn_any() {
 }
 
 download_csv
+

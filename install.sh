@@ -124,9 +124,8 @@ setup_default_shell() {
   fi
 }
 
-download_font() {
-  # download font from https://github.com/miiton/Cica
-  title "Downloading font"
+install_font() {
+  source_remote "bin/install_font.sh"
 }
 
 backup_zsh() {
@@ -339,7 +338,7 @@ install_packages
 setup_default_shell
 download_dotfiles
 setup_dotfiles_config
-download_font
+install_font
 install_dotfiles
 post_install_message
 

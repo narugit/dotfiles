@@ -1,3 +1,4 @@
+typeset -gU PATH
 # readelfとかのPATH
 export PATH="/usr/local/opt/binutils/bin:$PATH"
 # flutterのPATH

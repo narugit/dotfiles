@@ -23,13 +23,13 @@ is_hash_same() {
 
   if [ -z "${DOTFILES_REMOTE_HASH}" ]; then
     error "Please set ${HOME}/.ssh/id_rsa_personal"
-    exit 1
-  fi
-
-  if [ "${DOTFILES_LOCAL_HASH}" = "${DOTFILES_REMOTE_HASH}" ]; then
-    true
-  else
     false
+  else
+    if [ "${DOTFILES_LOCAL_HASH}" = "${DOTFILES_REMOTE_HASH}" ]; then
+      true
+    else
+      false
+    fi
   fi
 }
 

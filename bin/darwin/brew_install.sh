@@ -64,7 +64,7 @@ install_homebrew() {
 install_packages() {
   title "Installing brew packages"
   pn_cmds=$(get_pn_any "${ABBREV_COMMAND}" "darwin" "brew")
-  for v in "${pn_cmds[@]}"
+  for v in ${pn_cmds[@]}
   do
     local package=$(echo $v | awk -F',' '{ print $1 }')
     if has_package "$package"; then
@@ -77,7 +77,7 @@ install_packages() {
 
   title "Installing brew tap packages"
   pn_repos=$(get_pn_any "${ABBREV_REPOSITORY}" "darwin" "brew_tap")
-  for v in "${pn_repos[@]}"
+  for v in ${pn_repos[@]}
   do
     local package=$(echo $v | awk -F',' '{ print $1 }')
     local repo=$(echo $v | awk -F',' '{ print $2 }')
@@ -91,8 +91,8 @@ install_packages() {
   done
 
   title "Installing brew cask packages"
-  pn_cmds=$(get_pn_any "${ABBREV_COMMAND}" "darwin" "brew")
-  for v in "${pn_cmds[@]}"
+  pn_cmds=$(get_pn_any "${ABBREV_COMMAND}" "darwin" "brew_cask")
+  for v in ${pn_cmds[@]}
   do
     local package=$(echo $v | awk -F',' '{ print $1 }')
     if has_cask_package "$package"; then

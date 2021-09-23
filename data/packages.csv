@@ -5,7 +5,7 @@ aria2,aria2,,apt,linux
 aria2,aria2,,brew,darwin
 atool,atool,,apt,linux
 atool,atool,,brew,darwin
-bat,bat,,custom,linux
+bat,bat,,apt,linux
 bat,bat,,brew,darwin
 cmake,cmake,,apt,linux
 cmake,cmake,,brew,darwin
@@ -14,6 +14,8 @@ ffmpeg,ffmpeg,,brew,darwin
 font-hack-nerd-font,NO_COMMAND,,brew_cask,darwin
 git,git,,apt,linux
 git,git,,brew,darwin
+git-delta,delta,,brew,darwin
+git-delta,delta,,custom,linux
 google-chrome,NO_COMMAND,,brew_cask,darwin
 jq,jq,,apt,linux
 jq,jq,,brew,darwin

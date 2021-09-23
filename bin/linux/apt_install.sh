@@ -21,6 +21,7 @@ init() {
   mkdir -p "${DOTFILES_TMP_DIR}"
 
   source_remote "bin/log.sh"
+  source_remote "bin/parse_packages.sh"
 }
 
 has_package() {
@@ -35,28 +36,10 @@ has_package() {
 install_packages() {
   title "Installing packages"
 
-  local PACKAGES=(
-    "aria2"
-    "atool"
-    "bat"
-    "cmake"
-    "ffmpeg"
-    "gcc"
-    "git"
-    "jq"
-    "keychain"
-    "peco"
-    "python3"
-    "python3-pip"
-    "tmux"
-    "tree"
-    "vim"
-    "wget"
-    "youtube-dl"
-    "zsh"
-  )
-
-  for package in "${PACKAGES[@]}"; do
+  pns=$(get_pns "${ABBREV_COMMAND}" "linux" "apt")
+  for v in ${pns[@]}
+  do
+    local package=$(echo $v | awk -F',' '{ print $1 }')
     if has_package "$package"; then
       info "Already installed ${package}"
     else

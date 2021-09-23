@@ -29,6 +29,24 @@ get_index_from_col() {
   head -1 "${CSV}" | tr ',' '\n' | nl | grep -w "${col}" | tr -d " " | awk -F " " '{print $1}'
 }
 
+get_pns() {
+  local os="$1"
+  local install_by="$2"
+  local loc_col_head=$(get_index_from_col "${COL_HEAD}") 
+  local loc_col_command=$(get_index_from_col "${COL_COMMAND}") 
+  local loc_col_repository=$(get_index_from_col "${COL_REPOSITORY}") 
+  local loc_col_install_by=$(get_index_from_col "${COL_INSTALL_BY}") 
+  local loc_col_os=$(get_index_from_col "${COL_OS}") 
+  local values=()
+  while IFS="," read -r v_pn v_cmd v_repo v_install_by v_os
+  do
+    if echo "${v_os}${v_install_by}" | grep -x "${os}${install_by}" &> /dev/null; then
+      values+=("${v_pn}")
+    fi
+  done < <(cut -d "," -f${loc_col_head},${loc_col_command},${loc_col_repository},${loc_col_install_by},${loc_col_os} "${CSV}" | tail -n +2)
+  echo ${values[@]}
+}
+
 # Get "package name,any" from "os" and "install by".
 # If you use same combination of "os" and "install by", you will get same row's array
 get_pn_any() {

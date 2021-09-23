@@ -156,7 +156,12 @@ backup_ssh() {
 
 link_ssh() {
   title "Setup ssh"
-
+  
+  if [ ! -e "${SSH_DIR_DEST}" ]; then
+    info "Creating directory for ssh config"
+    mkdir -p "${SSH_DIR_DEST}"
+    chmod 700 "${SSH_DIR_DEST}"
+  fi
   info "Creating symlink for ssh config"
   ln -snfv "${SSH_DIR_SRC}/config" "${SSH_DIR_DEST}/config"
 

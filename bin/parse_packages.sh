@@ -16,7 +16,6 @@ ABBREV_OS="os"
 CSV_URL="${DOTFILES_RAW_URL_PREFIX}/data/packages.csv"
 CSV_DIR="${DOTFILES_TMP_DIR}/data"
 CSV="${CSV_DIR}/packages.csv"
-CSV="data/packages.csv"
 
 download_csv() {
   if [ ! -e "${CSV_DIR}" ]; then

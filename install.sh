@@ -99,10 +99,10 @@ setup_dotfiles_config() {
 
 install_packages() {
   if inquire "Install packages?"; then
-    if ${IS_LINUX}; then
+    if "${IS_LINUX}"; then
       source_remote "bin/linux/apt_install.sh"
       source_remote "bin/linux/custom_install.sh"
-    elif ${IS_DARWIN}; then
+    elif "${IS_DARWIN}"; then
       source_remote "bin/darwin/brew_install.sh"
     fi
   fi

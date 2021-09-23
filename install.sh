@@ -45,10 +45,12 @@ safety_remove() {
   local remove_message="Removing ${target}"
   if "${IS_WANTED_BACKUP}"; then
     info "${remove_message}"
+    unlink "${target}"
     rm -rf "${target}"
   else
     if inquire "Remove ${target}?"; then
       info "${remove_message}"
+      unlink "${target}"
       rm -rf "${target}"
     else
       error "Abort. You need to remove ${target}"

@@ -56,7 +56,7 @@ install_rustup() {
 
 has_cargo_package() {
   local package="$1"
-  if cargo install --list | grep "$package" >/dev/null 2>&1; then
+  if PATH="${HOME}/.cargo/bin:${PATH}" cargo install --list | grep "$package" >/dev/null 2>&1; then
     true
   else
     false

@@ -1,5 +1,5 @@
 package name,command,repository,install by,os
-aman,aman,NONE,custom,linux
+aman,aman,naruhiyo/aman,custom,linux
 aman,aman,naruhiyo/aman,brew_tap,darwin
 aria2,aria2,NONE,apt,linux
 aria2,aria2,NONE,brew,darwin

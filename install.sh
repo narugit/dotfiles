@@ -98,18 +98,13 @@ setup_dotfiles_config() {
 }
 
 install_packages() {
-  if ${IS_LINUX}; then
-    if inquire "Install apt packages?"; then
+  if inquire "Install packages?"; then
+    if ${IS_LINUX}; then
       source_remote "bin/linux/apt_install.sh"
-      source_remote "bin/linux/github_release_install.sh"
-    fi
-  elif ${IS_DARWIN}; then
-    if inquire "Install brew packages?"; then
+      source_remote "bin/linux/custom_install.sh"
+    elif ${IS_DARWIN}; then
       source_remote "bin/darwin/brew_install.sh"
     fi
-  fi
-  if inquire "Install cargo packages?"; then
-    source_remote "bin/cargo_install.sh"
   fi
 }
 

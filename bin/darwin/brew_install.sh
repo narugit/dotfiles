@@ -63,7 +63,7 @@ install_homebrew() {
 
 install_packages() {
   title "Installing brew packages"
-  pns=$(get_pns "darwin" "brew")
+  pns=($(get_pns "darwin" "brew"))
   for v in ${pns[@]}
   do
     local package=$(echo $v | awk -F',' '{ print $1 }')
@@ -76,7 +76,7 @@ install_packages() {
   done
 
   title "Installing brew tap packages"
-  pn_repos=$(get_pn_any "${ABBREV_REPOSITORY}" "darwin" "brew_tap")
+  pn_repos=($(get_pn_any "${ABBREV_REPOSITORY}" "darwin" "brew_tap"))
   for v in ${pn_repos[@]}
   do
     local package=$(echo $v | awk -F',' '{ print $1 }')
@@ -91,7 +91,7 @@ install_packages() {
   done
 
   title "Installing brew cask packages"
-  pns=$(get_pns "darwin" "brew_cask")
+  pns=($(get_pns "darwin" "brew_cask"))
   for v in ${pns[@]}
   do
     local package=$(echo $v | awk -F',' '{ print $1 }')

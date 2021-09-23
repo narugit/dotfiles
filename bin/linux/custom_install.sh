@@ -109,9 +109,9 @@ install_git-delta() {
 install_packages() {
   title "Install packages"
 
-  pns=$(get_pns "linux" "custom")
-  pn_repo=$(get_pn_any "${ABBREV_REPOSITORY}" "linux" "custom")
-  pn_cmd=$(get_pn_any "${ABBREV_COMMAND}" "linux" "custom")
+  pns=($(get_pns "linux" "custom"))
+  pn_repo=($(get_pn_any "${ABBREV_REPOSITORY}" "linux" "custom"))
+  pn_cmd=($(get_pn_any "${ABBREV_COMMAND}" "linux" "custom"))
   for i in "${!pns[@]}"
   do
     local package=$(echo ${pns[$i]} | awk -F',' '{ print $1 }')

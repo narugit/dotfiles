@@ -1,0 +1,10 @@
+[Unit]
+Description=Fetch master from narugit/dotfiles
+
+[Service]
+ExecStart=/usr/local/bin/dotfiles_fetch.sh
+Type=oneshot
+
+[Install]
+WantedBy=timers.target
+

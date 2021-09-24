@@ -56,7 +56,7 @@ setup_plist() {
   do
     info "Loading plist: ${plist}"
     sudo chmod 644 "${plist}"
-    launchctl unload "${plist}"
+    launchctl unload "${plist}" &> /dev/null
     launchctl load "${plist}"
   done
 }

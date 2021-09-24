@@ -99,7 +99,9 @@ download_dotfiles() {
 
 setup_dotfiles_config() {
   title "Setting git user name and email for this repository"
+  info "Setting git user name as ${GIT_CONFIG_LOCAL_USER_NAME}"
   (cd "${DOTFILES_DIR}" && git config --local user.name "${GIT_CONFIG_LOCAL_USER_NAME}")
+  info "Setting git user name as ${GIT_CONFIG_LOCAL_USER_EMAIL}"
   (cd "${DOTFILES_DIR}" && git config --local user.email "${GIT_CONFIG_LOCAL_USER_EMAIL}")
 }
 

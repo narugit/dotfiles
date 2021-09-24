@@ -89,6 +89,7 @@ install_cica() {
 }
 
 install_font() {
+  title "Install font"
   install_cica
 }
 

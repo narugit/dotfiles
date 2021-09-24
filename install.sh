@@ -326,6 +326,12 @@ install_dotfiles() {
   link_peco
 }
 
+setup_monitor() {
+  if "${IS_DARWIN}"; then
+    source_remote "bin/darwin/enable_launchd_plist.sh"
+  fi
+}
+
 post_install_message() {
   title "Command to enable some package"
   
@@ -342,6 +348,7 @@ download_dotfiles
 setup_dotfiles_config
 install_font
 install_dotfiles
+setup_monitor
 post_install_message
 
 success "Install successful."

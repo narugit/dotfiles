@@ -83,8 +83,10 @@ download_dotfiles() {
   title "Downloading ${DOTFILES_REPO_URL}"
   if [ -e "${DOTFILES_DIR}" ]; then
     if inquire "Remove ${DOTFILES_DIR}?"; then
-      unlink "${GIT_CONF_DIR_DEST}/.gitconfig"
-      cp "${HOME}/.gitconfig.secret" "${GIT_CONF_DIR_DEST}/.gitconfig"
+      if [ -e "${HOME}/.gitconfig.secret" ]; then
+        unlink "${GIT_CONF_DIR_DEST}/.gitconfig"
+        cp "${HOME}/.gitconfig.secret" "${GIT_CONF_DIR_DEST}/.gitconfig"
+      fi
       rm -rf "${DOTFILES_DIR}"
     else
       error "Abort. You need to remove ${DOTFILES_DIR}"

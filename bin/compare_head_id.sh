@@ -6,7 +6,7 @@ source "${DOTFILES_DIR}/bin/log.sh"
 
 is_hash_same() {
   local DOTFILES_DEFAULT_BRANCH="master"
-  local DOTFILES_REMOTE_HASH=$(cd ${DOTFILES_DIR} && git rev-parse origin/${DOTFILES_REMOTE_HASH})
+  local DOTFILES_REMOTE_HASH=$(cd ${DOTFILES_DIR} && git rev-parse origin/${DOTFILES_DEFAULT_BRANCH})
   local DOTFILES_LOCAL_HASH=$(cd ${DOTFILES_DIR} && git rev-parse ${DOTFILES_DEFAULT_BRANCH})
 
   if [ -z "${DOTFILES_REMOTE_HASH}" ]; then

@@ -83,13 +83,15 @@ download_dotfiles() {
   title "Downloading ${DOTFILES_REPO_URL}"
   if [ -e "${DOTFILES_DIR}" ]; then
     if inquire "Remove ${DOTFILES_DIR}?"; then
+      unlink "${GIT_CONF_DIR_DEST}/.gitconfig"
+      cp "${HOME}/.gitconfig.secret" "${GIT_CONF_DIR_DEST}/.gitconfig"
       rm -rf "${DOTFILES_DIR}"
     else
       error "Abort. You need to remove ${DOTFILES_DIR}"
       exit 1
     fi
   fi
-  git clone "${DOTFILES_REPO_URL}" "${DOTFILES_DIR}"
+  git clone "${DOTFILES_REPO_URL}" "${DOTFILES_DIR}" && rm -rf "${GIT_CONF_DIR_DEST}/.gitconfig"
   (cd "${DOTFILES_DIR}" && git remote set-url origin "${GITHUB_PERSONAL_HOST}:${DOTFILES_REPO}")
 }
 

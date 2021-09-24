@@ -31,7 +31,7 @@ is_local_clean() {
 
 title "Comparing remote dotfiles"
 if is_hash_same && is_local_clean; then
-  success "Your local dotfiles is up to date!"
+  success "Your local dotfiles may be up to date at least in a hour!"
 else
   warning "Your local dotfiles differs from remote dotfiles. Please check ${DOTFILES_DIR} and ${DOTFILES_REMOTE_URL}"
 fi

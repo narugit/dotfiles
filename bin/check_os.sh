@@ -4,7 +4,7 @@ DOTFILES_TMP_DIR="/tmp/dotfiles"
 DOTFILES_RAW_URL_PREFIX="https://raw.githubusercontent.com/narugit/dotfiles/master"
 INSTALL_DEST="/usr/local/bin"
 
-DARWIN_REQUIRE_MAJOR_VERSION="11"
+DARWIN_REQUIRE_MAJOR_VERSION="10"
 UBUNTU_REQUIRE_MAJOR_VERSION="20"
 
 source_remote() {

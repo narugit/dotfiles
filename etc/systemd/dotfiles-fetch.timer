@@ -1,8 +1,8 @@
 [Unit]
-Description=exec every hour
+Description=exec every 10 minutes
 
 [Timer]
-OnCalendar=*-*-* *:00:00
+OnCalendar=*-*-* *:0/10:00
 
 [Install]
 WantedBy=timers.target

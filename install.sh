@@ -333,6 +333,10 @@ install_dotfiles() {
 }
 
 setup_monitor() {
+  if [ -n "${IS_DOCKER}" ] && ${IS_DOCKER}; then
+    warning "Systemd or launchd is not supported in docker container."
+    return
+  fi
   if "${IS_DARWIN}"; then
     source_remote "bin/darwin/enable_launchd_plist.sh"
   elif "${IS_LINUX}"; then

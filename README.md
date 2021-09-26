@@ -44,3 +44,11 @@ The file overrides other global git configuration.
 I can add secret configuration, such as proxy.
 
 - `${HOME}/.ssh/config.secret`
+
+## Test in Docker Container
+Note: Not support feature to fetch hourly because I cannot find how to run systemd on Ubuntu 20.04 docker image on macOS. (See [issues#26](https://github.com/narugit/dotfiles/issues/26))
+
+```console
+$ cd ${HOME}/dotfiles/test/linux
+$ ./dockerrun.sh
+```

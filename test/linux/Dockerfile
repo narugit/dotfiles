@@ -9,6 +9,8 @@ RUN apt update && apt install -y \
 ARG TEST_USER
 ARG TEST_USER_PASS
 
+ENV IS_DOCKER true
+
 RUN useradd \
   -m --uid 1000 --groups sudo ${TEST_USER} -s /bin/bash \
   && echo ${TEST_USER}:${TEST_USER_PASS} | chpasswd

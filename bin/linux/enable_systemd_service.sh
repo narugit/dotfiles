@@ -29,26 +29,26 @@ setup_service() {
   info "Creating symlink for dotfiles_fetch.sh"
   sudo ln -snvf ${DOTFILES_DIR}/bin/dotfiles_fetch.sh "${DOTFILES_FETCH_DEST_DIR}"
   local SERVICE_SRC_DIR="${DOTFILES_DIR}/etc/systemd"
-  local SERVICE_DEST_DIR="/usr/local/lib/systemd/system"
+  local SERVICE_DEST_DIR="${HOME}/.config/systemd/user"
+  local FETCH_SERVICE_NAME="dotfiles-fetch.service"
+  local FETCH_TIMER_NAME="dotfiles-fetch.timer"
 
   if [ ! -e "${SERVICE_DEST_DIR}" ]; then
-    info "Creating directory: ${SERVICE_DEST_DIR}"
-    sudo mkdir -p "${SERVICE_DEST_DIR}"
+    info "Creating ${SERVICE_DEST_DIR}"
+    mkdir -p "${SERVICE_DEST_DIR}"
   fi
- 
+
   info "Setting up timer service"
-  for service in ${SERVICE_SRC_DIR}/*.timer
-  do
-    local service_name="$(basename ${service})"
-    info "Creating symlink for ${service_name}"
-    sudo chmod 644 "${service}"
-    sudo ln -snfv "${service}" "${SERVICE_DEST_DIR}"/
-    sudo systemctl daemon-reload
-    info "Enabling ${service_name}"
-    sudo systemctl enable "${SERVICE_DEST_DIR}/${service_name}"
-    info "Starting ${service_name}"
-    sudo systemctl start "${SERVICE_DEST_DIR}/${service_name}"
-  done
+  info "Creating symlink for dotfiles-fetch"
+  chmod 644 "${SERVICE_SRC_DIR}/${FETCH_TIMER_NAME}"
+  chmod 644 "${SERVICE_SRC_DIR}/${FETCH_SERVICE_NAME}"
+  systemctl link --user "${SERVICE_SRC_DIR}"/${FETCH_TIMER_NAME}
+  systemctl link --user "${SERVICE_SRC_DIR}"/${FETCH_SERVICE_NAME}
+  systemctl --user daemon-reload
+  info "Enabling ${FETCH_TIMER_NAME}"
+  systemctl --user enable "${FETCH_TIMER_NAME}"
+  info "Starting ${FETCH_TIMER_NAME}"
+  systemctl --user start "${FETCH_TIMER_NAME}"
 }
 
 init

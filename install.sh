@@ -128,7 +128,7 @@ setup_default_shell() {
 }
 
 install_font() {
-  source_remote "bin/install_font.sh"
+  source "${DOTFILES_DIR}/bin/install_font.sh"
 }
 
 backup_zsh() {
@@ -339,9 +339,9 @@ setup_monitor() {
     return
   fi
   if "${IS_DARWIN}"; then
-    source_remote "bin/darwin/enable_launchd_plist.sh"
+    source "${DOTFILES_DIR}/bin/darwin/enable_launchd_plist.sh"
   elif "${IS_LINUX}"; then
-    source_remote "bin/linux/enable_systemd_service.sh"
+    source "${DOTFILES_DIR}/bin/linux/enable_systemd_service.sh"
   fi
 }
 

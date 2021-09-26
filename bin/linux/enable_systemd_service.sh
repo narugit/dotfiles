@@ -27,7 +27,7 @@ setup_service() {
   local DOTFILES_FETCH_SRC="${DOTFILES_DIR}/bin/dotfiles_fetch.sh"
   local DOTFILES_FETCH_DEST_DIR="/usr/local/bin"
   info "Creating symlink for dotfiles_fetch.sh"
-  ln -snvf ${DOTFILES_DIR}/bin/dotfiles_fetch.sh "${DOTFILES_FETCH_DEST_DIR}"
+  sudo ln -snvf ${DOTFILES_DIR}/bin/dotfiles_fetch.sh "${DOTFILES_FETCH_DEST_DIR}"
   local SERVICE_SRC_DIR="${DOTFILES_DIR}/etc/systemd"
   local SERVICE_DEST_DIR="/usr/local/lib/systemd/system"
 
@@ -42,7 +42,7 @@ setup_service() {
     local service_name="$(basename ${service})"
     info "Creating symlink for ${service_name}"
     sudo chmod 644 "${service}"
-    ln -snfv "${service}" "${SERVICE_DEST_DIR}"/
+    sudo ln -snfv "${service}" "${SERVICE_DEST_DIR}"/
     sudo systemctl daemon-reload
     info "Enabling ${service_name}"
     sudo systemctl enable "${SERVICE_DEST_DIR}/${service_name}"

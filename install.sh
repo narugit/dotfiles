@@ -94,7 +94,7 @@ download_dotfiles() {
     fi
   fi
   git clone "${DOTFILES_REPO_URL}" "${DOTFILES_DIR}" && rm -rf "${GIT_CONF_DIR_DEST}/.gitconfig"
-  (cd "${DOTFILES_DIR}" && git remote set-url origin "${GITHUB_PERSONAL_HOST}:${DOTFILES_REPO}")
+  (cd "${DOTFILES_DIR}" && git remote set-url --push origin "${GITHUB_PERSONAL_HOST}:${DOTFILES_REPO}")
 }
 
 setup_dotfiles_config() {

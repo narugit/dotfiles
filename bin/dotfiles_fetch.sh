@@ -1,4 +1,5 @@
-#!/bin/bash -o pipefail
+#!/bin/bash
+set -o pipefail
 DOTFILES_DIR="${HOME}/dotfiles"
 
 log_print() {

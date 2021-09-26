@@ -333,6 +333,7 @@ install_dotfiles() {
 }
 
 setup_monitor() {
+  title "Setup remote dotfiles fetcher"
   if [ -n "${IS_DOCKER}" ] && ${IS_DOCKER}; then
     warning "Systemd or launchd is not supported in docker container."
     return

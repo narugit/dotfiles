@@ -3,7 +3,8 @@ MAINTAINER narugit
 
 RUN apt update && apt install -y \
   curl \
-  sudo
+  sudo \
+  tzdata
 
 ARG TEST_USER
 ARG TEST_USER_PASS

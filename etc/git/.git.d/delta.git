@@ -1,8 +1,8 @@
 [delta]
-  plus-style = "syntax #012800"
-  minus-style = "syntax #340001"
-  syntax-theme = Monokai Extended
-  navigate = true
   line-numbers = true
+  minus-style = "syntax #340001"
+  navigate = true
+  plus-style = "syntax #012800"
   side-by-side = true
+  syntax-theme = Monokai Extended
 

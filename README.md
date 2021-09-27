@@ -26,7 +26,7 @@ $ ssh-add -K ~/.ssh/id_rsa_personal
 ### Monitoring Differences Between Remote and Local Dotfiles
 When opening zsh, if there is a defference between remote and local dotfiles, warning message appears.
 
-[monitor-dotfiles](https://user-images.githubusercontent.com/51317139/134847919-b7815d8f-a3ba-448c-ac48-4467d8a7403e.png)
+![monitor-dotfiles](https://user-images.githubusercontent.com/51317139/134848314-2051a95a-15ae-4f40-bbeb-d4188c85ef3f.png)
 
 ### Secret Dotfiles
 Secret dotfiles are listed in `.gitignore`.

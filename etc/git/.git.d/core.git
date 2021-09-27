@@ -1,4 +1,5 @@
 [core]
-  whitespace = cr-at-eol
   autoCRLF = false
+  editor = vim
   excludesfile = ~/.gitignore_global
+  whitespace = cr-at-eol

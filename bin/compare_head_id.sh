@@ -22,7 +22,7 @@ is_hash_same() {
 }
 
 is_local_clean() {
-  if [ -z "$(git status --porcelain)" ]; then
+  if [ -z "$(cd ${DOTFILES_DIR} && git status --porcelain)" ]; then
     true
   else
     false

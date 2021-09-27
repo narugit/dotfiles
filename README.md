@@ -22,33 +22,40 @@ $ ssh-keygen -t ed25519 -C "narusens@gmail.com" -f ~/.ssh/id_rsa_personal
 $ ssh-add -K ~/.ssh/id_rsa_personal
 ```
 
-## Secret Dotfiles
+## Features
+### Monitoring Differences Between Remote and Local Dotfiles
+When opening zsh, if there is a defference between remote and local dotfiles, warning message appears.
+
+[monitor-dotfiles](https://user-images.githubusercontent.com/51317139/134847919-b7815d8f-a3ba-448c-ac48-4467d8a7403e.png)
+
+### Secret Dotfiles
 Secret dotfiles are listed in `.gitignore`.
 
 I suppose that I manage its only in local.
 
 I does not suppose that I upload its to GitHub because its are secret.
 
-### zsh
+#### zsh
 I can add secret configuration, such as secret environment variable in below.
 - `${HOME}/.zshrc.secret`
 
-### git
+#### git
 I can add secret configuration, such as user information (not my private account) in below.
 
 The file overrides other global git configuration.
 
 - `${HOME}/.gitconfig.secret`
 
-### ssh
+#### ssh
 I can add secret configuration, such as proxy.
 
 - `${HOME}/.ssh/config.secret`
 
 ## Test in Docker Container
-Note: Not support feature to fetch hourly because I cannot find how to run systemd on Ubuntu 20.04 docker image on macOS. (See [issues#26](https://github.com/narugit/dotfiles/issues/26))
+Note: Not support feature to fetch preodically because I cannot find how to run systemd on Ubuntu 20.04 docker image on macOS. (See [issues#26](https://github.com/narugit/dotfiles/issues/26))
 
 ```console
 $ cd ${HOME}/dotfiles/test/linux
 $ ./dockerrun.sh
 ```
+

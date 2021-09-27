@@ -17,7 +17,7 @@ $ ssh-keygen -t ed25519 -C "narusens@gmail.com" -f ~/.ssh/id_rsa_personal
 
 2. Visit [GitHub's SSH key settings page](https://github.com/settings/keys) and register public key.
 
-3. Add key chain.
+3. (Only in Darwin) Add key chain.
 ```console
 $ ssh-add -K ~/.ssh/id_rsa_personal
 ```

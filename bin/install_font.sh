@@ -74,6 +74,5 @@ install_font() {
   install_cica
 }
 
-init
 install_font
 

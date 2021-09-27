@@ -40,6 +40,5 @@ setup_plist() {
   done
 }
 
-init
 setup_plist
 

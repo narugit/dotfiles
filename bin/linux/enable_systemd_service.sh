@@ -31,6 +31,5 @@ setup_service() {
   systemctl --user start "${FETCH_TIMER_NAME}"
 }
 
-init
 setup_service
 

@@ -55,7 +55,6 @@ I can add secret configuration, such as proxy.
 Note: Not support feature to fetch preodically because I cannot find how to run systemd on Ubuntu 20.04 docker image on macOS. (See [issues#26](https://github.com/narugit/dotfiles/issues/26))
 
 ```console
-$ cd ${HOME}/dotfiles/test/linux
-$ ./dockerrun.sh
+$ ${HOME}/dotfiles/test/linux/dockerrun.sh
 ```
 

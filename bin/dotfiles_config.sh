@@ -41,10 +41,12 @@ PECO_CONF_DIR_DEST="${HOME}/.config/peco"
 # ====== ssh ======
 # ${HOME}/
 #     |- .ssh
-#         |- .config.d/ -> dotfiles/etc/ssh/.config.d/[darwin|linux]
+#         |- config -> dotfiles/etc/ssh/config
+#         `- .config.d/ -> dotfiles/etc/ssh/.config.d/[darwin|linux]
 #     `- dotfiles/
 #         `- etc/
 #             `- ssh/
+#                 |- config
 #                 `- .config.d/
 #                     |- darwin/
 #                     `- linux/

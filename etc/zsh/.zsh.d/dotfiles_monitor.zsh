@@ -52,6 +52,6 @@ lottery_to_compare() {
 }
 
 if lottery_to_compare; then
-  source "${DOTFILES_DIR}/bin/compare_head_id.sh"
+  source "${DOTFILES_DIR}/bin/dotfiles_compare.sh"
 fi
 

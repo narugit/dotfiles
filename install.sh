@@ -79,8 +79,8 @@ check_os() {
   info "OS is supported."
 }
 
-download_dotfiles() {
-  title "Downloading ${DOTFILES_REPO_URL}"
+clone_dotfiles() {
+  title "Cloning ${DOTFILES_REPO_URL}"
   if [ -e "${DOTFILES_DIR}" ]; then
     if inquire "Remove ${DOTFILES_DIR}?"; then
       if [ -e "${HOME}/.gitconfig.secret" ]; then
@@ -357,7 +357,7 @@ check_os
 backup_dotfiles
 install_packages
 setup_default_shell
-download_dotfiles
+clone_dotfiles
 setup_dotfiles_config
 install_font
 install_dotfiles

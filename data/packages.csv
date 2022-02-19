@@ -27,7 +27,7 @@ python3,python3,NONE,apt,linux
 python3,python3,NONE,brew,darwin
 python3-pip,pip3,NONE,apt,linux
 slack,NO_COMMAND,NONE,brew_cask,darwin
-spectacle,NO_COMMAND,NONE,brew_cask,darwin
+rectangle,NO_COMMAND,NONE,brew_cask,darwin
 tmux,tmux,NONE,apt,linux
 tmux,tmux,NONE,brew,darwin
 tree,tree,NONE,apt,linux

@@ -18,6 +18,7 @@ git,git,NONE,brew,darwin
 git-delta,delta,NONE,brew,darwin
 git-delta,delta,NONE,custom,linux
 google-chrome,NO_COMMAND,NONE,brew_cask,darwin
+iterm2,NO_COMMAND,NONE,brew_cask,darwin
 jq,jq,NONE,apt,linux
 jq,jq,NONE,brew,darwin
 keychain,keychain,NONE,apt,linux

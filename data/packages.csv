@@ -11,7 +11,6 @@ cmake,cmake,NONE,apt,linux
 cmake,cmake,NONE,brew,darwin
 ffmpeg,ffmpeg,NONE,apt,linux
 ffmpeg,ffmpeg,NONE,brew,darwin
-font-hack-nerd-font,NO_COMMAND,NONE,brew_cask,darwin
 gcc,gcc,NONE,apt,linux
 git,git,NONE,apt,linux
 git,git,NONE,brew,darwin

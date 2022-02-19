@@ -56,8 +56,7 @@ install_homebrew() {
   if command_exists "brew"; then
     info "Already installed homebrew"
   else
-    info "Installing homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    error "Command not found: brew. Please visit https://brew.sh/ and install homebrew."
   fi
 }
 

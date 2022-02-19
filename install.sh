@@ -135,7 +135,7 @@ download_iterm2_color_scheme() {
   title "Download color scheme for iterm2"
   local iterm2_conf_dir="${HOME}/.iterm2.d"
   local iterm2_color_dir="${iterm2_conf_dir}/colors"
-  local iterm2_mucolor="iceberg"
+  local iterm2_mycolor="iceberg"
   local iterm2_mycolor_url="https://raw.githubusercontent.com/Arc0re/Iceberg-iTerm2/master/iceberg.itermcolors"
   local iterm2_mycolor_file="${iterm2_color_dir}/iceberg.itermcolors"
   if [ -e "${iterm2_mycolor_file}" ]; then

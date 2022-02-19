@@ -6,7 +6,7 @@ PLIST_LOG_DIR="/var/log/dotfiles"
 source "${DOTFILES_DIR}/bin/log.sh"
 
 setup_plist() {
-  title "Setup launchd plist"
+  info "Setup launchd plist"
   if [ ! -e "${PLIST_LOG_DIR}" ]; then
     info "Creating log directory: ${PLIST_LOG_DIR}"
     sudo mkdir -p "${PLIST_LOG_DIR}"

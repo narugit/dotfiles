@@ -139,9 +139,9 @@ download_iterm2_color_scheme() {
   local iterm2_mycolor_url="https://raw.githubusercontent.com/Arc0re/Iceberg-iTerm2/master/iceberg.itermcolors"
   local iterm2_mycolor_file="${iterm2_color_dir}/iceberg.itermcolors"
   if [ -e "${iterm2_mycolor_file}" ]; then
-    info "Already download ${iterm2_mycolor}"
+    info "Already download ${iterm2_mycolor}."
   else
-    info "Downloading ${iterm2_mycolor}"
+    info "Downloading ${iterm2_mycolor}."
     curl -sSL "${iterm2_mycolor_url}" -o "${iterm2_mycolor_file}" --create-dirs
   fi
   readonly POST_INSTALL_MESSAGE_ITERM2_COLOR_SCHEMES="For iterm2, import ${iterm2_mycolor_file}."

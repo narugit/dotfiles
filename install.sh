@@ -142,7 +142,7 @@ download_iterm2_color_scheme() {
     info "Already download ${iterm2_mycolor}"
   else
     info "Downloading ${iterm2_mycolor}"
-    curl -sSL "${iceberg_url}" -o "${iterm2_mycolor_file}" --create-dirs
+    curl -sSL "${iterm2_mycolor_url}" -o "${iterm2_mycolor_file}" --create-dirs
   fi
   readonly POST_INSTALL_MESSAGE_ITERM2_COLOR_SCHEMES="For iterm2, import ${iterm2_mycolor_file}."
 }

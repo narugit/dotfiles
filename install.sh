@@ -131,6 +131,17 @@ install_font() {
   source "${DOTFILES_DIR}/bin/install_font.sh"
 }
 
+download_iterm2_color_scheme() {
+  title "Download color scheme for iterm2"
+  local iterm2_conf_dir="${HOME}/.iterm2.d"
+  local iterm2_color_dir="${iterm2_conf_dir}/colors"
+  info "Downloading iceberg"
+  local iterm2_myclors_url="https://raw.githubusercontent.com/Arc0re/Iceberg-iTerm2/master/iceberg.itermcolors"
+  local iterm2_mycolors_file="${iterm2_color_dir}/iceberg.itermcolors"
+  curl -sSL "${iceberg_url}" -o "${iterm2_mycolors_file}" --create-dirs
+  readonly POST_INSTALL_MESSAGE_ITERM2_COLOR_SCHEMES="For iterm2, import ${iterm2_mycolors_file}."
+}
+
 backup_zsh() {
   title "Backup zsh"
   local zsh_dir="zsh"
@@ -348,6 +359,8 @@ setup_monitor() {
 post_install_message() {
   title "Command to enable some package"
   
+  info "${POST_INSTALL_MESSAGE_ITERM2_COLOR_SCHEMES}"
+  info "For your terminal app, set your favorite font."
   info "For zsh, relogin \"su - $(whoami)\" or reload by \"$ source ~/.zshrc\"."
   info "For tmux, launch tmux then press \"Prefix + I\"."
 }
@@ -360,6 +373,9 @@ setup_default_shell
 clone_dotfiles
 setup_dotfiles_config
 install_font
+if "${IS_DARWIN}"; then
+  install_iterm2_color_scheme
+fi
 install_dotfiles
 setup_monitor
 post_install_message

@@ -22,6 +22,15 @@ $ ssh-keygen -t ed25519 -C "narusens@gmail.com" -f ~/.ssh/id_rsa_personal
 $ ssh-add -K ~/.ssh/id_rsa_personal
 ```
 
+### Keyboard shortcut
+- Disable default keyboard shortcut, <kbd>Ctrl-Space</kbd> not to conflict with [my tmux prefix](https://github.com/narugit/dotfiles/blob/dddb2c128df8fb8ef2ed2b87fbf5d5daf21b789c/etc/tmux/.tmux.d/keybinding.tmux#L1).
+
+<details>
+<summary>...</summary>
+<img src="https://user-images.githubusercontent.com/28133383/154788477-01ea7358-6eae-45d8-b174-f89fdbc4d403.png" width="30%">
+</details>
+
+
 ## Features
 ### Monitoring Differences Between Remote and Local Dotfiles
 When opening zsh, if there is a defference between remote and local dotfiles, warning message appears.

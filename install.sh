@@ -138,7 +138,9 @@ download_iterm2_color_scheme() {
   info "Downloading iceberg"
   local iterm2_myclors_url="https://raw.githubusercontent.com/Arc0re/Iceberg-iTerm2/master/iceberg.itermcolors"
   local iterm2_mycolors_file="${iterm2_color_dir}/iceberg.itermcolors"
-  curl -sSL "${iceberg_url}" -o "${iterm2_mycolors_file}" --create-dirs
+  if [ -e "${iterm2_myclors_file}" ]; then
+    curl -sSL "${iceberg_url}" -o "${iterm2_mycolors_file}" --create-dirs
+  fi
   readonly POST_INSTALL_MESSAGE_ITERM2_COLOR_SCHEMES="For iterm2, import ${iterm2_mycolors_file}."
 }
 
@@ -374,7 +376,7 @@ clone_dotfiles
 setup_dotfiles_config
 install_font
 if "${IS_DARWIN}"; then
-  install_iterm2_color_scheme
+  download_iterm2_color_scheme
 fi
 install_dotfiles
 setup_monitor

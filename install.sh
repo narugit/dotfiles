@@ -135,13 +135,16 @@ download_iterm2_color_scheme() {
   title "Download color scheme for iterm2"
   local iterm2_conf_dir="${HOME}/.iterm2.d"
   local iterm2_color_dir="${iterm2_conf_dir}/colors"
-  info "Downloading iceberg"
-  local iterm2_myclors_url="https://raw.githubusercontent.com/Arc0re/Iceberg-iTerm2/master/iceberg.itermcolors"
-  local iterm2_mycolors_file="${iterm2_color_dir}/iceberg.itermcolors"
-  if [ -e "${iterm2_myclors_file}" ]; then
-    curl -sSL "${iceberg_url}" -o "${iterm2_mycolors_file}" --create-dirs
+  local iterm2_mucolor="iceberg"
+  local iterm2_mycolor_url="https://raw.githubusercontent.com/Arc0re/Iceberg-iTerm2/master/iceberg.itermcolors"
+  local iterm2_mycolor_file="${iterm2_color_dir}/iceberg.itermcolors"
+  if [ -e "${iterm2_mycolor_file}" ]; then
+    info "Already download ${iterm2_mycolor}"
+  elif
+    info "Downloading ${iterm2_mycolor}"
+    curl -sSL "${iceberg_url}" -o "${iterm2_mycolor_file}" --create-dirs
   fi
-  readonly POST_INSTALL_MESSAGE_ITERM2_COLOR_SCHEMES="For iterm2, import ${iterm2_mycolors_file}."
+  readonly POST_INSTALL_MESSAGE_ITERM2_COLOR_SCHEMES="For iterm2, import ${iterm2_mycolor_file}."
 }
 
 backup_zsh() {

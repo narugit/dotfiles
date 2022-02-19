@@ -140,7 +140,7 @@ download_iterm2_color_scheme() {
   local iterm2_mycolor_file="${iterm2_color_dir}/iceberg.itermcolors"
   if [ -e "${iterm2_mycolor_file}" ]; then
     info "Already download ${iterm2_mycolor}"
-  elif
+  else
     info "Downloading ${iterm2_mycolor}"
     curl -sSL "${iceberg_url}" -o "${iterm2_mycolor_file}" --create-dirs
   fi

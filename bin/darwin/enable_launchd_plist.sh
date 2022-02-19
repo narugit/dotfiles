@@ -17,7 +17,7 @@ setup_plist() {
   DOTFILES_FETCH_SRC="${DOTFILES_DIR}/bin/dotfiles_fetch.sh"
   DOTFILES_FETCH_DEST_DIR="/usr/local/bin"
   info "Creating symlink for dotfiles_fetch.sh"
-  ln -snvf ${DOTFILES_DIR}/bin/dotfiles_fetch.sh "${DOTFILES_FETCH_DEST_DIR}"
+  sudo ln -snvf ${DOTFILES_DIR}/bin/dotfiles_fetch.sh "${DOTFILES_FETCH_DEST_DIR}"
   
   PLIST_SRC_DIR="${DOTFILES_DIR}/etc/launchd"
   PLIST_DEST_DIR="${HOME}/Library/LaunchAgents"

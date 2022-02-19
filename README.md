@@ -27,7 +27,7 @@ $ ssh-add -K ~/.ssh/id_rsa_personal
 
 <details>
 <summary>...</summary>
-<img src="https://user-images.githubusercontent.com/28133383/154788477-01ea7358-6eae-45d8-b174-f89fdbc4d403.png" width="30%">
+<img src="https://user-images.githubusercontent.com/28133383/154788477-01ea7358-6eae-45d8-b174-f89fdbc4d403.png" width="50%">
 </details>
 
 

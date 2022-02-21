@@ -16,6 +16,10 @@ setup_plist() {
   
   DOTFILES_FETCH_SRC="${DOTFILES_DIR}/bin/dotfiles_fetch.sh"
   DOTFILES_FETCH_DEST_DIR="/usr/local/bin"
+  if [ ! -e "${DOTFILES_FETCH_DEST_DIR}" ]; then
+    info "Creating log directory: ${DOTFILES_FETCH_DEST_DIR}"
+    sudo mkdir -p "${DOTFILES_FETCH_DEST_DIR}"
+  fi
   info "Creating symlink for dotfiles_fetch.sh"
   sudo ln -snvf ${DOTFILES_DIR}/bin/dotfiles_fetch.sh "${DOTFILES_FETCH_DEST_DIR}"
   

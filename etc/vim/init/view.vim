@@ -14,3 +14,4 @@ set t_Co=256
 set list listchars=tab:\▸\-
 set splitbelow
 set splitright
+set shortmess-=S

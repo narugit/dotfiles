@@ -6,6 +6,7 @@ set cursorcolumn
 set virtualedit=onemore
 set smartindent
 set showmatch
+set statusline=%<%F\ %h%m%r%y%=%-14.(%l,%c%V%)\ %P
 set laststatus=2
 syntax on
 set background=dark

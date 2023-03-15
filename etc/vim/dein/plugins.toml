@@ -51,3 +51,6 @@
 [[plugins]]
     repo = 'cohama/lexima.vim'
 
+[[plugins]]
+    repo = 'mechatroner/rainbow_csv'
+

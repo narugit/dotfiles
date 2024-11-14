@@ -16,7 +16,7 @@ command_exists() {
 
 get_latest_version() {
   local repo="$1"
-  curl --silent "https://api.github.com/${repo}/releases/latest" | jq -r '.tag_name'
+  curl --silent "https://api.github.com/repos/${repo}/releases/latest" | jq -r '.tag_name'
 }
 
 download_release() {

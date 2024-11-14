@@ -53,7 +53,7 @@ install_cica() {
   else
     info "Installing Cica"
     local latest_version="$(get_latest_version ${repo})"
-    local release_file="Cica_${latest_version}_with_emoji.zip"
+    local release_file="Cica_${latest_version}.zip"
     local downloaded_path="$(download_release "${repo}" "${release_file}")"
     local downloaded_file="${downloaded_path}/${release_file}"
     (cd "${downloaded_path}" && unzip "${downloaded_file}" &> /dev/null)

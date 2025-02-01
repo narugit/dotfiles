@@ -2,6 +2,8 @@
 
 This is my dotfiles' settings.
 
+For Japanese, please see also https://qiita.com/narugit/items/318cb3dfc27f4217bdde
+
 ## How to Install
 
 ```console
